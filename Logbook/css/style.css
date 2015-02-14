@@ -1,1 +1,120 @@
-/* Fill me up, Scotty! */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  background-color: #393F48;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  color: #9B9EA2;
+  margin: 0;
+  line-height: 1em;
+  margin-bottom: 0.33em;
+}
+
+p {
+  color: #9B9EA2;
+  margin-top: 0.33em;
+  margin-bottom: 0.33em;
+}
+
+a {
+  text-decoration: none;
+  color:#43BE64
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+p.small {
+  font-size: 16px;
+}
+
+p.verySmall {
+  font-size: 13px;
+}
+
+div.header {
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+}
+
+/* I honestly for the love of god could not come up with a better name than
+this. Its rather self explanatory anyway. */
+div.bigThing {
+  margin-top: 60px;
+}
+
+div.overallContainer {
+  width: 100%;
+}
+
+div.contentContainer {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+div.contentContainer-90 {
+  width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* I am bad with coming up with names... */
+div.advert {
+  width: 400px;
+  height: 250px;;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+input {
+  border-radius: 3px;
+  border-width: 0;
+}
+
+input.searchBar {
+  height: 24px;
+  font-size: 15px;
+  padding-left: 6px;
+}
+
+input.signUp {
+  height: 46px;
+  font-size: 17px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+button {
+  border-radius: 3px;
+  border-width: 0;
+  height: 34px;
+}
+
+#signUpButton {
+  width: 352px;
+  background-color: #43BE64;
+  margin-top: 10px;
+}
+
+#signInButton {
+  width: 75px;
+  background-color: #747679;
+  margin-top: 13px;
+  float:right;
+}
