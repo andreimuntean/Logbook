@@ -1,7 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@font-face {
+  font-family: "LiberationSans-Regular";
+  src: url("../assets/fonts/LiberationSans-Regular.ttf");
+}
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "LiberationSans-Regular";
   font-size: 20px;
   background-color: #393F48;
   margin: 0;
@@ -84,6 +87,7 @@ div.advert {
 input {
   border-radius: 3px;
   border-width: 0;
+  background-color: #EEF3F8;
 }
 
 input.searchBar {
@@ -107,14 +111,26 @@ button {
 }
 
 #signUpButton {
-  width: 352px;
-  background-color: #43BE64;
+  width: 362px;
   margin-top: 10px;
 }
 
 #signInButton {
   width: 75px;
-  background-color: #747679;
   margin-top: 13px;
-  float:right;
+  float: right;
+}
+
+.greyGradient {
+  background: linear-gradient(#9B9EA2, #747679); /* Standard syntax */
+  background: -webkit-linear-gradient(#9B9EA2, #747679); /* Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#9B9EA2, #747679); /* Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#9B9EA2, #747679); /* Firefox 3.6 to 15 */
+}
+
+.greenGradient {
+  background: linear-gradient(#43BE64, #328E4B); /* Standard syntax */
+  background: -webkit-linear-gradient(#43BE64, #328E4B); /* Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#43BE64, #328E4B); /* Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#43BE64, #328E4B); /* Firefox 3.6 to 15 */
 }
