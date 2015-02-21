@@ -3,6 +3,11 @@
   src: url("../assets/fonts/LiberationSans-Regular.ttf");
 }
 
+@font-face {
+  font-family: "LiberationSans-Bold";
+  src: url("../assets/fonts/LiberationSans-Bold.ttf");
+}
+
 body {
   font-family: "LiberationSans-Regular";
   font-size: 20px;
@@ -13,6 +18,7 @@ body {
 h1, h2, h3 {
   color: #9B9EA2;
   margin: 0;
+  font-weight: normal;
   line-height: 1em;
   margin-bottom: 0.33em;
 }
@@ -50,22 +56,25 @@ p.verySmall {
 
 div.header {
   text-align: center;
-  line-height: 60px;
-  height: 60px;
+  line-height: 70px;
+  height: 54px;
 }
 
 /* I honestly for the love of god could not come up with a better name than
 this. Its rather self explanatory anyway. */
-div.bigThing {
+div.bigThing { /* That's what she said. */
   margin-top: 60px;
 }
 
 div.overallContainer {
-  width: 100%;
+  width: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 div.contentContainer {
-  width: 1000px;
+  width: 984px;
+  padding: 8px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -79,45 +88,52 @@ div.contentContainer-90 {
 /* I am bad with coming up with names... */
 div.advert {
   width: 400px;
-  height: 250px;;
+  height: 250px;
   margin-bottom: 25px;
   text-align: center;
 }
 
 input {
+  font-family: "LiberationSans-Regular";
   border-radius: 3px;
   border-width: 0;
   background-color: #EEF3F8;
 }
 
 input.searchBar {
-  height: 24px;
+  float: left;
+  height: 28px;
   font-size: 15px;
   padding-left: 6px;
+  margin-left: 30px;
+  margin-top: 12px;
 }
 
 input.signUp {
-  height: 46px;
+  height: 48px;
+  width: 336px;
   font-size: 17px;
-  padding-left: 10px;
+  padding-left: 14px;
   margin-bottom: 10px;
-  margin-left: 0;
 }
 
 button {
+  font-family: "LiberationSans-Bold";
   border-radius: 3px;
   border-width: 0;
   height: 34px;
+  color: #EEF3F8;
+  font-size: 14px;
 }
 
 #signUpButton {
-  width: 362px;
+  width: 350px;
   margin-top: 10px;
 }
 
-#signInButton {
+.navbarButton1 {
   width: 75px;
-  margin-top: 13px;
+  margin-top: 10px;
   float: right;
 }
 
