@@ -4,12 +4,12 @@
 
 		function __construct($id){
 			$db = DB::getInstance();
-			$res = $db->query("SELECT * FROM `Users` WHERE id = $id");
+			$res = $db->query("SELECT * FROM `users` WHERE id = $id");
 			foreach($res as $row){
 				$this->id = $id;
 				$this->username = $row['username'];
 				$this->email = $row['email'];
-				$this->profile_pic = $row['profile_pic'];
+				$this->profile_pic = is_null($row['profile_pic'])?'':$row['profile_pic'];
 				$this->bio = $row['bio'];
 			}
 		}

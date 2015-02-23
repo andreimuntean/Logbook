@@ -1,7 +1,4 @@
 <?php
-	include "db.inc.php";
-	$db = DB::getInstance();
-
 /**
  * Performs user authentication
  *
@@ -13,9 +10,10 @@
 
     function login($username, $password){
 	    try{    
-	        $stmt = $db->prepare("SELECT * FROM `Users` WHERE `username` = username AND `password` = password");
-	        $stmt->bindParam(':username', $username);
-	        $stmt->bindParam(':password', $password);
+		$db = DB::getInstance();
+	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
+	        $stmt->bindParam(1, $username);
+	        $stmt->bindParam(2, $password);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
 	        $stmt->execute();
         }
@@ -24,8 +22,8 @@
 	    	 return;
 	    }
 
-        foreach($result as $row){
-        	return $row['id'];
+        foreach($stmt->fetchAll() as $row){
+        	return $row['username'];
         }
         return 0;
     }
@@ -45,11 +43,12 @@
     function register($name, $email, $username, $password){
 	    try{
 	    	$password = sha1($password);
-	    	$stmt = $db->prepare("INSERT INTO `Users`(`name`, `email`, `username`, `password`) VALUES(name, email, username, password)");
-	    	$stmt->bindParam(':name', $name);
-	    	$stmt->bindParam(':email', $email);
-	    	$stmt->bindParam(':username', $username);
-	    	$stmt->bindParam(':password', $password);
+		$db = DB::getInstance();
+	    	$stmt = $db->prepare("INSERT INTO `users`(`name`, `email`, `username`, `password`) VALUES(?, ?, ?, ?)");
+	    	$stmt->bindParam(1, $name);
+	    	$stmt->bindParam(2, $email);
+	    	$stmt->bindParam(3, $username);
+	    	$stmt->bindParam(4, $password);
 	    	$stmt->execute();
 	    }
 	    catch(PDOException $e) {
@@ -58,5 +57,5 @@
 	    }
 	    return 0;
     }
-?>
 
+?>
