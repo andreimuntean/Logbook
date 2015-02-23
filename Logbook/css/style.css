@@ -85,6 +85,20 @@ div.contentContainer-90 {
   margin-left: auto;
 }
 
+div.logbookSelectionPane {
+  width: 234px;
+  margin-left: auto;
+  /*margin-right: 5px;*/
+  overflow-y: scroll;
+}
+
+div.logbookEditor {
+  width: 702px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+}
+
 /* I am bad with coming up with names... */
 div.advert {
   width: 400px;
