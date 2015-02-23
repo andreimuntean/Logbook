@@ -145,17 +145,33 @@ button.navbarButton1 {
   float: right;
 }
 
-button.logEditorButton {
+button.logbookButton {
   font-family: "LiberationSans-Regular";
-  border-width: 2px;
-  background-color: #2d3239;
   text-align: left;
-  border-style: dashed;
+  margin-bottom: 5px;
+  padding-left:12px;
+  height:50px;
+  width:212px;
 }
 
 #signUpButton {
   width: 350px;
   margin-top: 10px;
+}
+
+#createLogbookButton {
+  background-color: #2d3239;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+#createLogbookEntryButton {
+  background-color: #2d3239;
+  border-width: 2px;
+  border-style: dashed;
+  height: 80px;
+  width:680px;
+  padding-left:24px;
 }
 
 .greyGradient {
