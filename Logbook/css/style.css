@@ -139,15 +139,23 @@ button {
   font-size: 14px;
 }
 
-#signUpButton {
-  width: 350px;
-  margin-top: 10px;
-}
-
-.navbarButton1 {
+button.navbarButton1 {
   width: 75px;
   margin-top: 10px;
   float: right;
+}
+
+button.logEditorButton {
+  font-family: "LiberationSans-Regular";
+  border-width: 2px;
+  background-color: #2d3239;
+  text-align: left;
+  border-style: dashed;
+}
+
+#signUpButton {
+  width: 350px;
+  margin-top: 10px;
 }
 
 .greyGradient {
