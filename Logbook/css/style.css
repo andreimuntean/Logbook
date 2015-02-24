@@ -106,6 +106,34 @@ div.advert {
   text-align: center;
 }
 
+div.entryContainer {
+  height: 134px;
+  width: 680px;
+  margin-bottom: 15px;
+}
+
+div.entryHeader {
+  height: 34px;
+  width: 644px;
+  background-color: #393f48;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 34px;
+  padding: 0 18px 0 18px;
+}
+
+div.entryContent {
+  min-height: 80px;
+  width: 644px;
+  background-color: #333840;
+  color: #FFFFFF;
+  padding: 10px 18px 10px 18px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 input {
   font-family: "LiberationSans-Regular";
   border-radius: 3px;
