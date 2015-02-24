@@ -142,6 +142,7 @@ button {
 button.navbarButton1 {
   width: 75px;
   margin-top: 10px;
+  margin-left: 10px;
   float: right;
 }
 
@@ -187,4 +188,18 @@ button.logbookButton {
   background: -webkit-linear-gradient(#43BE64, #328E4B); /* Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#43BE64, #328E4B); /* Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#43BE64, #328E4B); /* Firefox 3.6 to 15 */
+}
+
+img.navbarIconRight {
+  float: right;
+  margin-left: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+img.navbarProfilePic {
+  float: right;
+  border-radius: 3px;
+  margin-top: 15px;
+  margin-right: 3px;
 }
