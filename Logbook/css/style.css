@@ -106,6 +106,12 @@ div.advert {
   text-align: center;
 }
 
+div.logbookContainer {
+  height: 50px;
+  width: 212px;
+  margin-bottom: 5px;
+}
+
 div.entryContainer {
   height: 134px;
   width: 680px;
@@ -177,11 +183,20 @@ button.navbarButton1 {
 button.logbookButton {
   font-family: "LiberationSans-Regular";
   text-align: left;
-  margin-bottom: 5px;
   padding-left:12px;
-  height:50px;
-  width:212px;
+  border-radius: 3px 0 0 3px;
+  height: 50px;
+  width: 162px;
   background-color: #393F48;
+  float: left;
+}
+
+button.settingsButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 0 3px 3px 0;
+  background-color: #43BE64;
+  float: right;
 }
 
 #signUpButton {
@@ -193,6 +208,7 @@ button.logbookButton {
   background-color: #2d3239;
   border-width: 2px;
   border-style: dashed;
+  width: 212px;
 }
 
 #createLogbookEntryButton {
