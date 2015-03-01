@@ -140,6 +140,32 @@ div.entryContent {
   border-bottom-right-radius: 3px;
 }
 
+div.popUp {
+  position: absolute;
+  width: 500px;
+  min-height: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #EEEEEE;
+  border-radius: 6px;
+  border: 0;
+  z-index: 20;
+  margin: auto;
+}
+
+/* This is to be used with div.popUp - it creates a dark transparent area around
+ * the div to separate it from the other content on the page.*/
+div.blanket {
+  background-color: #010101;
+  opacity: 0.65;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
 input {
   font-family: "LiberationSans-Regular";
   border-radius: 3px;
@@ -196,6 +222,20 @@ button.settingsButton {
   width: 50px;
   border-radius: 0 3px 3px 0;
   background-color: #43BE64;
+  background-image: url(../assets/logbook-page/settings-icon.png);
+  background-size: 40px 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+  float: right;
+}
+
+button.closeButton {
+  height: 40px;
+  width: 40px;
+  background-image: url(../assets/logbook-page/close-icon.png);
+  background-size: 40px 40px;
+  background-repeat: no-repeat;
+  background-position: center;
   float: right;
 }
 
@@ -239,6 +279,8 @@ img.navbarIconRight {
   margin-left: 10px;
   border-radius: 3px;
   margin-top: 10px;
+  height: 34px;
+  width: 34px;
 }
 
 img.navbarProfilePic {
@@ -246,4 +288,6 @@ img.navbarProfilePic {
   border-radius: 3px;
   margin-top: 15px;
   margin-right: 3px;
+  height: 24px;
+  width: 24px;
 }
