@@ -46,6 +46,10 @@ h3 {
   font-size: 24px;
 }
 
+p.large {
+  font-size: 24px;
+}
+
 p.small {
   font-size: 16px;
 }
@@ -146,7 +150,7 @@ div.popUp {
   min-height: 200px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #EEEEEE;
+  background-color: #E2E2E2;
   border-radius: 6px;
   border: 0;
   z-index: 20;
@@ -272,6 +276,13 @@ button.closeButton {
   background: -webkit-linear-gradient(#43BE64, #328E4B); /* Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#43BE64, #328E4B); /* Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#43BE64, #328E4B); /* Firefox 3.6 to 15 */
+}
+
+.redGradient {
+  background: linear-gradient(#FF5050, #FF0000);  /* Standard syntax */
+  background: -webkit-linear-gradient(#FF5050, #FF0000); /* Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#FF5050, #FF0000); /* Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#FF5050, #FF0000); /* Firefox 3.6 to 15 */
 }
 
 img.navbarIconRight {

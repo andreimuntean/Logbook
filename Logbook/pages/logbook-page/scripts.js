@@ -1,9 +1,7 @@
-// Keeps track of the id number given to logbooks.
-var logbookIDCounter = 0;
-// Keeps track of the id number given to logbook entries.
-var idCounter = 0;
-// This keeps an array of every logbook created so far.
-var logbooks = [];
+var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
+var idCounter = 0;            // Keeps track of the id number given to logbook entries.
+var logbooks = [];            // This keeps an array of every logbook created so far.
+var createNewLogbook = false; // Decides whether or not to create a new logbook when saving.
 
 // Creates a logbook and settings button in the left selection pane.
 function createLogbook ()
@@ -29,8 +27,6 @@ function createLogbook ()
   settingsButton.setAttribute ("type", "button");
   settingsButton.onclick = partial (toggleLogbookSettings, true);
   document.getElementById(logbookID).appendChild (settingsButton);
-
-  toggleLogbookSettings (true);
 
   // logbookIDCounter is incremented (guarantees each entry id is unique).
   logbookIDCounter++;
@@ -66,7 +62,6 @@ function createLogbookEntry ()
 function toggleLogbookSettings (isOn)
 {
   var display = "";
-
   if (isOn) {
     display = 'block';
   } else {
@@ -75,6 +70,18 @@ function toggleLogbookSettings (isOn)
 
   document.getElementById("settings").style.display = display;
   document.getElementById("blanket").style.display = display;
+}
+
+// Saves the desired settings for a logbook.
+function saveLogbookSettings ()
+{
+  toggleLogbookSettings (false)
+  // If true, a logbook is created with these
+  if (createNewLogbook)
+  {
+    createNewLogbook = false;
+    createLogbook ();
+  }
 }
 
 /* Code taken from: 'http://blog.dreasgrech.com/2009/11/passing-pointer-to-functi

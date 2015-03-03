@@ -36,7 +36,8 @@
 
         <div class="logbookContainer">
           <button type="button" class="logbookButton" id="createLogbookButton"
-            onclick="createLogbook()">New Logbook...</button>
+            onclick="toggleLogbookSettings(true); createNewLogbook = true;">New Logbook...
+          </button>
         </div>
 
       </div>
@@ -68,8 +69,52 @@
     <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
 
       <h2 style="float:left">Settings</h2>
-      <button class="closeButton", type="button", style="background-color: #EEEEEE", onClick="toggleLogbookSettings(false)">
+      <button class="closeButton" type="button" style="background-color: #E2E2E2"
+        onClick="toggleLogbookSettings(false)">
       </button>
+
+    </div>
+
+    <div style="height:300px">
+
+      <div style="height:300px; width:200px; float:left">
+
+        <p class="large">Name</p>
+        <p class="large">Visibility</p>
+        <p class="large">Group logbook</p>
+        <h3 style="font-size:28px; margin-top:0.66em">General info:</h2>
+        <div style="margin-left:20px">
+          <p class="large">Created on: </p>
+          <p class="large">Last updated: </p>
+          <p class="large">Entries: </p>
+        </div>
+
+      </div>
+
+      <div style="height:300px; width:300px; float:right;">
+
+        <form>
+          <input style="height:28px; margin-top:5px; margin-bottom:9px;
+            padding-left:8px; font-size:16px" placeholder="LogbookName" size=34>
+          <select style="font-size:18px; margin-bottom:16px">
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+          <br>
+          <input type="checkbox" style="height:18px; width:18px; margin:0"
+            value="group">
+        </form>
+
+      </div>
+
+    </div>
+
+    <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
+
+      <button class="navbarButton1 redGradient" style="float:left; margin:0" onclick=
+        "toggleLogbookSettings(false)">Cancel</button>
+      <button class="navbarButton1 greenGradient", style="float:right; margin:0" onclick=
+        "saveLogbookSettings();">Save</button>
 
     </div>
 
