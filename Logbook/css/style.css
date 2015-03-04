@@ -147,12 +147,14 @@ div.entryContent {
 div.popUp {
   position: absolute;
   width: 500px;
-  min-height: 200px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: #E2E2E2;
   border-radius: 6px;
   border: 0;
+  display: none;
+  top: calc(25% - 100px);
+  left: calc(50% - 250px);
   z-index: 20;
   margin: auto;
 }
@@ -167,7 +169,14 @@ div.blanket {
   left: 0px;
   width: 100%;
   height: 100%;
+  display: none;
   z-index: 10;
+}
+
+div.form label {
+  display: inline-block;
+  text-align: right;
+  margin-bottom: 15px;
 }
 
 input {

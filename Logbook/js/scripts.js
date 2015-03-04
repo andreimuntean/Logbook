@@ -32,7 +32,7 @@ $(document).ready(function(){
  				"username":username,
  				"email":email,
  				"password":password
- 			}	
+ 			}
  		})
  		.done(function(response){
  			response = response.trim();
@@ -60,7 +60,7 @@ $(document).ready(function(){
  			type:"post",
  			data:{
  				"logout":"1"
- 			}	
+ 			}
  		}).done(function(response){
  			$.notify("Bye!", "success");
  			setTimeout(function(){
@@ -102,7 +102,7 @@ function createLogbook ()
   // Creates the logbook settings button and adds it as well.
   settingsButton.setAttribute ("class", "settingsButton");
   settingsButton.setAttribute ("type", "button");
-  settingsButton.onclick = partial (toggleLogbookSettings, true);
+  settingsButton.onclick = partial (togglePopUp, true, 'settings');
   document.getElementById(logbookID).appendChild (settingsButton);
 
   // logbookIDCounter is incremented (guarantees each entry id is unique).
@@ -136,7 +136,7 @@ function createLogbookEntry ()
 }
 
 // Opens the logbook settings popup.
-function toggleLogbookSettings (isOn)
+function togglePopUp (isOn, id)
 {
   var display = "";
   if (isOn) {
@@ -145,14 +145,14 @@ function toggleLogbookSettings (isOn)
     display = 'none'
   }
 
-  document.getElementById("settings").style.display = display;
+  document.getElementById(id).style.display = display;
   document.getElementById("blanket").style.display = display;
 }
 
 // Saves the desired settings for a logbook.
 function saveLogbookSettings ()
 {
-  toggleLogbookSettings (false)
+  togglePopUp (false, 'settings')
   // If true, a logbook is created with these
   if (createNewLogbook)
   {

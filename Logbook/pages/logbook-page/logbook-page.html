@@ -4,11 +4,11 @@
 <head>
   <title>MyLogbook</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Landing Page">
-  <meta name="keywords" content="landing, homepage">
-  <meta name="author" content="Pranav Bahuguna">
+  <meta name="description" content="Logbook Page">
+  <meta name="keywords" content="logbook, editor">
+  <meta name="author" content="Z5">
   <link href="../../css/style.css" rel="stylesheet">
-  <script language="JavaScript" src="scripts.js"></script>
+  <script language="JavaScript" src="../../js/scripts.js"></script>
 </head>
 
 <body style="height:100vh">
@@ -36,7 +36,7 @@
 
         <div class="logbookContainer">
           <button type="button" class="logbookButton" id="createLogbookButton"
-            onclick="toggleLogbookSettings(true); createNewLogbook = true;">New Logbook...
+            onclick="togglePopUp(true, 'settings'); createNewLogbook = true;">New Logbook...
           </button>
         </div>
 
@@ -63,14 +63,14 @@
 
   <!-- These divs contain the logbook settings popup and opacity blanket. They
        are not visible until a new logbook is created. -->
-  <div class="blanket", id="blanket", style="display:none"></div>
-  <div class="popUp", id="settings", style="display:none; top:calc(25% - 100px); left:calc(50% - 250px)">
+  <div class="blanket", id="blanket"></div>
+  <div class="popUp", id="settings" style="min-height:200px">
 
     <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
 
       <h2 style="float:left">Settings</h2>
       <button class="closeButton" type="button" style="background-color: #E2E2E2"
-        onClick="toggleLogbookSettings(false)">
+        onClick="togglePopUp(false, 'settings')">
       </button>
 
     </div>
@@ -94,6 +94,8 @@
       <div style="height:300px; width:300px; float:right;">
 
         <form>
+
+          <div class="form"></div>
           <input style="height:28px; margin-top:5px; margin-bottom:9px;
             padding-left:8px; font-size:16px" placeholder="LogbookName" size=34>
           <select style="font-size:18px; margin-bottom:16px">
@@ -103,6 +105,7 @@
           <br>
           <input type="checkbox" style="height:18px; width:18px; margin:0"
             value="group">
+
         </form>
 
       </div>
@@ -112,7 +115,7 @@
     <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
 
       <button class="navbarButton1 redGradient" style="float:left; margin:0" onclick=
-        "toggleLogbookSettings(false)">Cancel</button>
+        "togglePopUp(false, 'settings')">Cancel</button>
       <button class="navbarButton1 greenGradient", style="float:right; margin:0" onclick=
         "saveLogbookSettings();">Save</button>
 
