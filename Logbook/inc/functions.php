@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Performs user authentication
  *
@@ -19,11 +20,10 @@
         }
 	    catch(PDOException $e) {
 	    	 echo "Error: " . $e->getMessage();
-	    	 return;
+	    	 return 0;
 	    }
-
         foreach($stmt->fetchAll() as $row){
-        	return $row['username'];
+        	return 1;
         }
         return 0;
     }
@@ -40,22 +40,67 @@
  */
 
 
-    function register($name, $email, $username, $password){
+    function register($email, $username, $password){
 	    try{
+	    	if(!checkEmail($email))
+	    		return -2;
+	    	if(!checkUsername($username))
+	    		return -3;
+	    	$db = DB::getInstance();
+	    	//encrypting password
 	    	$password = sha1($password);
-		$db = DB::getInstance();
-	    	$stmt = $db->prepare("INSERT INTO `users`(`name`, `email`, `username`, `password`) VALUES(?, ?, ?, ?)");
-	    	$stmt->bindParam(1, $name);
-	    	$stmt->bindParam(2, $email);
-	    	$stmt->bindParam(3, $username);
-	    	$stmt->bindParam(4, $password);
+			$registerDate = date('Y-m-d H:i:s');
+			//generating user specific password
+			$token = md5($email.$username.$password.$registerDate);
+			$tokenID = insertToken($token);
+	    	$stmt = $db->prepare("INSERT INTO `users`(`email`, `username`, `password`, `confirm_token_id`, `register_date`) VALUES(?, ?, ?, ?, ?)");
+	    	$stmt->bindParam(1, $email);
+	    	$stmt->bindParam(2, $username);
+	    	$stmt->bindParam(3, $password);
+	    	$stmt->bindParam(4, $tokenID);
+	    	$stmt->bindParam(5, $registerDate);
 	    	$stmt->execute();
+	    	return $db->lastInsertID();
 	    }
 	    catch(PDOException $e) {
 	    	 echo "Error: " . $e->getMessage();
 	    	 return -1;
 	    }
-	    return 0;
+	    return -1;
+    }
+
+
+    function insertToken($token){
+    	$db = DB::getInstance();
+    	//echo $token;
+    	//one week later
+		$expire_date = date(time()+604800);
+		//echo $expire_date;
+		$stmt = $db->prepare("INSERT INTO `confirm_tokens`(`token`, `expire_date`) VALUES(?, ?)");
+    	$stmt->bindParam(1, $token);
+    	$stmt->bindParam(2, $expire_date);
+    	$stmt->execute();
+    	return $db->lastInsertID();
+    }
+
+    function checkEmail($email){
+    	$db = DB::getInstance();
+    	$stmt = $db->prepare("SELECT * FROM `users` WHERE `email` = ?");
+    	$stmt->bindParam(1, $email);
+    	$stmt->execute();
+    	if($data = $stmt->fetch())
+    		return false;
+    	return true;
+    }
+
+    function checkUsername($username){
+    	$db = DB::getInstance();
+    	$stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ?");
+    	$stmt->bindParam(1, $username);
+    	$stmt->execute();
+    	if($data = $stmt->fetch())
+    		return false;
+    	return true;
     }
 
 ?>

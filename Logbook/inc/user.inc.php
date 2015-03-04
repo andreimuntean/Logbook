@@ -13,6 +13,10 @@
 				$this->bio = $row['bio'];
 			}
 		}
+
+		function getUsername(){
+			return $this->username;
+		}
 	}
 ?>
 

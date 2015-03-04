@@ -4,8 +4,8 @@
 
       private static $db = NULL;
       public static $CONNECTION_STRING = "mysql:host=localhost;dbname=myLogbook;charset=utf8";
-      public static $DB_USER = "seb";
-      public static $DB_PASS = "6n2h84C367Zo";
+      public static $DB_USER = "root";
+      public static $DB_PASS = "";
 
 /**
  * Getting instance of the current database connection
@@ -17,7 +17,7 @@
           if (is_null(self::$db)) {
               self::$db = new PDO(self::$CONNECTION_STRING, self::$DB_USER, self::$DB_PASS);
           }
-	  self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           return self::$db;
       }
 
