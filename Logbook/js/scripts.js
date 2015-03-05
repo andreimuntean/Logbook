@@ -68,7 +68,25 @@ $(document).ready(function(){
  			}, 1000)
  		})
 	})
+
+
+
 })
+
+function addLogbookToDB(logbookName, logbookPrivacy){
+    $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "name":logbookName,
+                "privacy":logbookPrivacy,
+                "action":"new"
+            }
+    }).done(function(response){
+        createLogbook(logbookName, response)
+            console.log(response);
+    })
+}
 
 
 
@@ -81,9 +99,9 @@ var logbooks = [];            // This keeps an array of every logbook created so
 var createNewLogbook = false; // Decides whether or not to create a new logbook when saving.
 
 // Creates a logbook and settings button in the left selection pane.
-function createLogbook ()
+function createLogbook (logbookName, logbookID)
 {
-  var logbookID       = "logbook" + logbookIDCounter;
+  /*var logbookID       = "logbook" + logbookIDCounter;*/
   var logbookDiv      = document.createElement ("div");
   var logbookButton   = document.createElement ("button");
   var settingsButton  = document.createElement ("button");
@@ -96,7 +114,7 @@ function createLogbook ()
   // Creates the logbook button and adds it to the new div.
   logbookButton.setAttribute ("class", "logbookButton");
   logbookButton.setAttribute ("type", "button");
-  logbookButton.innerHTML = "Test text";
+  logbookButton.innerHTML = /*"Test text";*/ logbookName;
   document.getElementById(logbookID).appendChild (logbookButton);
 
   // Creates the logbook settings button and adds it as well.
@@ -157,7 +175,9 @@ function saveLogbookSettings ()
   if (createNewLogbook)
   {
     createNewLogbook = false;
-    createLogbook ();
+    name = $("#newLogbookName").val();
+    privacy = $("#newLogbookPrivacy").val();
+    addLogbookToDB(name, privacy);
   }
 }
 

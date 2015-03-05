@@ -3,17 +3,18 @@
 /**
  * Performs user authentication
  *
- * @param String    $username username of the user
- * @param String 	$password Sha1 encrypted password of the user 
+ * @param String    $email email of the user
+ * @param String 	$password    password of the user 
  * @throws PDOException 	invalid input or database disconnection
  * @return Integer 	
  */
 
-    function login($username, $password){
+    function login($email, $password){
 	    try{    
-		$db = DB::getInstance();
-	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
-	        $stmt->bindParam(1, $username);
+	    	$password = sha1($password);
+			$db = DB::getInstance();
+	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `email` = ? AND `password` = ?");
+	        $stmt->bindParam(1, $email);
 	        $stmt->bindParam(2, $password);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
 	        $stmt->execute();
