@@ -311,3 +311,16 @@ img.navbarProfilePic {
   height: 24px;
   width: 24px;
 }
+
+span.saveButton {
+  float: right;
+  text-decoration: none;
+  color:#43BE64;
+  font-size: 13px;
+}
+
+textarea.entryTextArea {
+  resize: none;
+  width: 640px;
+  height: 80px;
+}

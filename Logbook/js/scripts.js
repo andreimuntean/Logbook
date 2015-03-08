@@ -134,6 +134,8 @@ function createLogbookEntry ()
   var entryHeader   = document.createElement ("div");
   var entryContent  = document.createElement ("div");
   var entryID       = "entry" + idCounter;
+  var entryTextArea = document.createElement ("textarea");
+  var saveEntry     = document.createElement ("span");
 
   // Creates the container div and sets its id so the other divs can be placed
   // inside.
@@ -148,6 +150,14 @@ function createLogbookEntry ()
   entryContent.setAttribute ("class", "entryContent");
   document.getElementById(entryID).appendChild (entryHeader);
   document.getElementById(entryID).appendChild (entryContent);
+  
+  entryTextArea.setAttribute ("class", "entryTextArea");
+  saveEntry.setAttribute ("class", "saveButton");
+
+  entryHeader.appendChild (saveEntry);
+  entryContent.appendChild (entryTextArea);
+
+  saveEntry.innerHTML = "Save";
 
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
