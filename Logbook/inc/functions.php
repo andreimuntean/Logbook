@@ -3,18 +3,18 @@
 /**
  * Performs user authentication
  *
- * @param String    $email email of the user
+ * @param String    $username username of the user
  * @param String 	$password    password of the user 
  * @throws PDOException 	invalid input or database disconnection
  * @return Integer 	
  */
 
-    function login($email, $password){
+    function login($username, $password){
 	    try{    
 	    	$password = sha1($password);
 			$db = DB::getInstance();
-	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `email` = ? AND `password` = ?");
-	        $stmt->bindParam(1, $email);
+	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
+	        $stmt->bindParam(1, $username);
 	        $stmt->bindParam(2, $password);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
 	        $stmt->execute();
@@ -24,7 +24,7 @@
 	    	 return 0;
 	    }
         foreach($stmt->fetchAll() as $row){
-        	return 1;
+        	return $row['id'];
         }
         return 0;
     }
@@ -32,7 +32,6 @@
 /**
  * Registers a user
  *
- * @param String    $name name of the user
  * @param String    $email email of the user
  * @param String    $username username of the user
  * @param String 	$password Sha1 encrypted password of the user 
