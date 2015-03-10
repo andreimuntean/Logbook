@@ -130,20 +130,20 @@
 
     </div>
 
-    <div style="width:480px; font-size:16px">
+    <div style="height:88px; width:480px; font-size:16px">
 
       <form>
 
         <div class="form">
           <label for="username" style="width:100px"><b>Username</b></label>
           <input style="height:28px; padding-left:8px; margin-left:10px;
-            font-size:16px" id="username" size=30>
+            font-size:16px" id="sign-in-username" size=30>
         </div>
 
         <div class="form">
           <label for="password" style="width:100px"><b>Password</b></label>
-          <input style="height:28px; padding-left:8px; margin-left:10px;
-            font-size:16px" id="password" size=30>
+          <input type="password" style="height:28px; padding-left:8px; margin-left:10px;
+            font-size:16px" id="sign-in-password" size=30>
         </div>
 
       </form>
@@ -154,8 +154,8 @@
 
       <button class="navbarButton1 redGradient" style="float:left; margin:0"
         onclick="togglePopUp(false, 'signIn')">Cancel</button>
-      <button class="navbarButton1 greenGradient", style="float:right; margin:0"
-        onclick="togglePopUp(false, 'signIn')">Sign in</button>
+      <button class="navbarButton1 greenGradient", id = "sign-in-button" style="float:right; margin:0"
+        >Sign in</button>
 
     </div>
 

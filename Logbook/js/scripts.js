@@ -69,6 +69,29 @@ $(document).ready(function(){
  		})
 	})
 
+  $("#sign-in-button").click(function(){
+    $.ajax({
+      url:"inc/login.php",
+      type:"post",
+      data:{
+        "username":$("#sign-in-username").val(),
+        "password":$("#sign-in-password").val()
+      }
+    }).done(function(response){
+      response = response.trim();
+      console.log(response);
+      if(response == "0")
+        $.notify("Wrong username and password combination", "alert");
+      else
+      {
+        $.notify("Successfully logged in", "success");
+        setTimeout(function(){
+          location.href = "home.php";
+        }, 500)
+      }
+    })
+  })
+
 
 
 })
