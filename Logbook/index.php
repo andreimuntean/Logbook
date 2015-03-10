@@ -30,7 +30,8 @@
         <span style="color:#43BE64; font-weight:bold">My</span>Logbook
       </h2>
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
-      <button type="button" class="navbarButton1 greyGradient">Sign In</button>
+      <button type="button" class="navbarButton1 greyGradient"
+        onclick="togglePopUp(true, 'signIn')">Sign In</button>
     </div>
   </div>
 
@@ -113,6 +114,51 @@
     <p class="verySmall" style="margin-bottom:8px;">&copy;
       2015 Z5 | <a>Terms</a> <a>Privacy</a> <a>About</a>
     </p>
+
+  </div>
+
+  <!-- These divs contain the logbook settings popup and opacity blanket. They
+       are not visible until a new logbook is created. -->
+  <div class="blanket", id="blanket"></div>
+  <div class="popUp", id="signIn" style="height:200px">
+
+    <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
+
+      <h2 style="float:left">Sign in</h2>
+      <button class="closeButton" type="button" style="background-color: #E2E2E2"
+        onClick="togglePopUp(false, 'signIn')">
+      </button>
+
+    </div>
+
+    <div style="height:88px; width:480px; font-size:16px">
+
+      <form>
+
+        <div class="form">
+          <label for="username" style="width:100px"><b>Username</b></label>
+          <input style="height:28px; padding-left:8px; margin-left:10px;
+            font-size:16px" id="username" size=30>
+        </div>
+
+        <div class="form">
+          <label for="password" style="width:100px"><b>Password</b></label>
+          <input style="height:28px; padding-left:8px; margin-left:10px;
+            font-size:16px" id="password" size=30>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
+
+      <button class="navbarButton1 redGradient" style="float:left; margin:0"
+        onclick="togglePopUp(false, 'signIn')">Cancel</button>
+      <button class="navbarButton1 greenGradient", style="float:right; margin:0"
+        onclick="togglePopUp(false, 'signIn')">Sign in</button>
+
+    </div>
 
   </div>
 
