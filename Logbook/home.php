@@ -77,7 +77,7 @@ session_start();
   <!-- These divs contain the logbook settings popup and opacity blanket. They
        are not visible until a new logbook is created. -->
   <div class="blanket", id="blanket"></div>
-  <div class="popUp", id="settings" style="min-height:200px">
+  <div class="popUp", id="settings">
 
     <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
 
@@ -88,53 +88,67 @@ session_start();
 
     </div>
 
-    <div style="height:300px">
+    <div style="width:480px; font-size:16px">
 
-      <div style="height:300px; width:200px; float:left">
+      <form>
 
-        <p class="large">Name</p>
-        <p class="large">Visibility</p>
-        <p class="large">Group logbook</p>
-        <h3 style="font-size:28px; margin-top:0.66em">General info:</h2>
-        <div style="margin-left:20px">
-          <p class="large">Created on: </p>
-          <p class="large">Last updated: </p>
-          <p class="large">Entries: </p>
+        <div>
+          <label for="logbookName" style="width:120px"><b>Name</b></label>
+          <input id='logbookName' style="height:28px; padding-left:8px;
+            margin-left:10px; font-size:16px" size=30>
         </div>
 
-      </div>
-
-      <div style="height:300px; width:300px; float:right;">
-
-        <form>
-
-          <div class="form"></div>
-          <input style="height:28px; margin-top:5px; margin-bottom:9px;
-            padding-left:8px; font-size:16px" id='newLogbookName' placeholder="LogbookName" size=34>
-          <select id='newLogbookPrivacy' style="font-size:18px; margin-bottom:16px">
+        <div>
+          <label for="visibility" style="width:120px"><b>Visibility</b></label>
+          <select id='visibility' style="font-size:16px; margin-left:10px;">
             <option value="0">Public</option>
             <option value="1">Private</option>
           </select>
-          <br>
-          <input type="checkbox" style="height:18px; width:18px; margin:0"
-            value="group">
+        </div>
 
-        </form>
+        <div>
+          <label for='groupLogbook' style="width:120px"><b>Group Logbook</b></label>
+          <input id='groupLogbook' type="checkbox" style="height:16px; width:16px;
+            margin:0 0 0 10px" value="group">
+        </div>
 
+      </form>
+
+    </div>
+
+    <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
+
+      <h3 style="float:left">General info</h3>
+
+    </div>
+
+    <div style="font-size:16px">
+
+      <div>
+        <label for="createdOn" style="width:120px"><b>Created on</b></label>
+        <p id='createdOn' style="margin-left:10px"></p>
+      </div>
+
+      <div>
+        <label for="lastUpdated" style="width:120px"><b>Last updated</b></label>
+        <p id='lastUpdated' style="margin-left:10px"></p>
+      </div>
+
+      <div>
+        <label for="entryNum" style="width:120px"><b>Entries</b></label>
+        <p id='entryNum' style="margin-left:10px"></p>
       </div>
 
     </div>
 
     <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
 
-      <button class="navbarButton1 redGradient" style="float:left; margin:0" onclick=
-        "togglePopUp(false, 'settings')">Cancel</button>
-      <button class="navbarButton1 greenGradient", style="float:right; margin:0" onclick=
-        "saveLogbookSettings();">Save</button>
+      <button class="navbarButton1 redGradient" style="float:left; margin:0"
+        onclick="deleteLogbook()">Delete</button>
+      <button class="navbarButton1 greenGradient", style="float:right; margin:0"
+        onclick="saveLogbookSettings()">Sign in</button>
 
     </div>
-
-  </div>
 
 </body>
 

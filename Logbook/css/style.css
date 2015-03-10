@@ -173,7 +173,7 @@ div.blanket {
   z-index: 10;
 }
 
-div.form label {
+label {
   display: inline-block;
   text-align: right;
   margin-bottom: 15px;

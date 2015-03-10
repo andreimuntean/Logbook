@@ -6,7 +6,6 @@
   }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,7 +119,7 @@
   <!-- These divs contain the logbook settings popup and opacity blanket. They
        are not visible until a new logbook is created. -->
   <div class="blanket", id="blanket"></div>
-  <div class="popUp", id="signIn" style="height:200px">
+  <div class="popUp", id="signIn">
 
     <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
 
@@ -131,7 +130,7 @@
 
     </div>
 
-    <div style="height:88px; width:480px; font-size:16px">
+    <div style="width:480px; font-size:16px">
 
       <form>
 
