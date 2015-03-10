@@ -88,15 +88,11 @@ function addLogbookToDB(logbookName, logbookPrivacy){
     })
 }
 
-
-
-
-
-
 var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
 var idCounter = 0;            // Keeps track of the id number given to logbook entries.
 var logbooks = [];            // This keeps an array of every logbook created so far.
 var createNewLogbook = false; // Decides whether or not to create a new logbook when saving.
+var currentLogbookID = 0;
 
 // Creates a logbook and settings button in the left selection pane.
 function createLogbook (logbookName, logbookID)
@@ -120,7 +116,7 @@ function createLogbook (logbookName, logbookID)
   // Creates the logbook settings button and adds it as well.
   settingsButton.setAttribute ("class", "settingsButton");
   settingsButton.setAttribute ("type", "button");
-  settingsButton.onclick = partial (togglePopUp, true, 'settings');
+  settingsButton.onclick = partial (openLogbookSettings, logbookID);
   document.getElementById(logbookID).appendChild (settingsButton);
 
   // logbookIDCounter is incremented (guarantees each entry id is unique).
@@ -150,7 +146,7 @@ function createLogbookEntry ()
   entryContent.setAttribute ("class", "entryContent");
   document.getElementById(entryID).appendChild (entryHeader);
   document.getElementById(entryID).appendChild (entryContent);
-  
+
   entryTextArea.setAttribute ("class", "entryTextArea");
   saveEntry.setAttribute ("class", "saveButton");
 
@@ -189,6 +185,26 @@ function saveLogbookSettings ()
     privacy = $("#newLogbookPrivacy").val();
     addLogbookToDB(name, privacy);
   }
+}
+
+// Cancels logbook creation or removes a logbook from the user's logbooks.
+function deleteLogbook ()
+{
+	togglePopUp (false, 'settings')
+	// If false, the logbook is a preexisting one and must be removed.
+	// NOTE: Insert some code here that can remove a logbook from server!
+	if (!createNewLogbook)
+	{
+		var logbookToDelete = document.getElementById (currentLogbookID);
+		document.getElementById ("logbookSelectionPane").removeChild (logbookToDelete)
+	}
+}
+
+// Toggles the logbook settings popup on AND sets the currentLogbookID.
+function openLogbookSettings (logbookID)
+{
+	togglePopUp (true, 'settings');
+	currentLogbookID = logbookID;
 }
 
 /* Code taken from: 'http://blog.dreasgrech.com/2009/11/passing-pointer-to-functi
