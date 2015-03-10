@@ -1,13 +1,14 @@
 <?php
+include 'inc/db.inc.php';
 include 'inc/user.inc.php';
 session_start();
 
- /* if(!isset($_SESSION['user'])){
+  if(!isset($_SESSION['user'])){
     header("Location: index.php");
     die();
   }else{
     $user = unserialize($_SESSION['user']);
-  }*/
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,7 @@ session_start();
       <img id="logoutButton" class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
       <img class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
       <img class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
-      <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:13px">genericUsername</h3>
+      <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:13px"><?php echo $user->getUsername();?></h3>
       <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png">
     </div>
   </div>
@@ -52,6 +53,20 @@ session_start();
             onclick="togglePopUp(true, 'settings'); createNewLogbook = true;">New Logbook...
           </button>
         </div>
+
+<?php
+	// displaying logbooks
+	$db = DB::getInstance();
+	$userID = $user->getID();
+	foreach ($db->query("SELECT * FROM `logbooks` WHERE `user_id` = $userID") as $row) {
+	/*	echo '<div class="logbookContainer" id="'. $row['id'] .'">'
+				.'<button class="logbookButton" type="button">' . $row['name'] . '</button>'
+				.'<button onclick="partial(openLogbookSettings, '. $row['id'] .')" class="settingsButton" type="button"></button>'
+			.'</div>';*/
+		echo "<script>createLogbook('".$row['name']."', ".$row['id'].")</script>";
+}
+
+?>
 
       </div>
 
@@ -146,7 +161,7 @@ session_start();
       <button class="navbarButton1 redGradient" style="float:left; margin:0"
         onclick="deleteLogbook()">Delete</button>
       <button class="navbarButton1 greenGradient", style="float:right; margin:0"
-        onclick="saveLogbookSettings()">Sign in</button>
+        onclick="saveLogbookSettings()">Save</button>
 
     </div>
 

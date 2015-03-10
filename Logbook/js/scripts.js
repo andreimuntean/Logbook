@@ -111,6 +111,19 @@ function addLogbookToDB(logbookName, logbookPrivacy){
     })
 }
 
+function deleteLogbookfromDB(logbookID){
+    $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "id":logbookID,
+                "action":"delete"
+            }
+    }).done(function(response){
+            console.log(response);
+    })
+}
+
 var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
 var idCounter = 0;            // Keeps track of the id number given to logbook entries.
 var logbooks = [];            // This keeps an array of every logbook created so far.
@@ -204,8 +217,9 @@ function saveLogbookSettings ()
   if (createNewLogbook)
   {
     createNewLogbook = false;
-    name = $("#newLogbookName").val();
-    privacy = $("#newLogbookPrivacy").val();
+    name = $("#logbookName").val();
+    $("#logbookName").val("");
+    privacy = $("#visibility").val();
     addLogbookToDB(name, privacy);
   }
 }
@@ -218,6 +232,7 @@ function deleteLogbook ()
 	// NOTE: Insert some code here that can remove a logbook from server!
 	if (!createNewLogbook)
 	{
+    deleteLogbookfromDB(currentLogbookID);
 		var logbookToDelete = document.getElementById (currentLogbookID);
 		document.getElementById ("logbookSelectionPane").removeChild (logbookToDelete)
 	}
@@ -232,10 +247,11 @@ function openLogbookSettings (logbookID)
 
 /* Code taken from: 'http://blog.dreasgrech.com/2009/11/passing-pointer-to-functi
  * on-with.html'. It allows a function reference to be passed with parameters.*/
-var partial = function (func /*, 0..n args */) {
+
+  var partial = function (func /*, 0..n args */) {
     var args = Array.prototype.slice.call(arguments, 1);
     return function () {
         var allArguments = args.concat(Array.prototype.slice.call(arguments));
         return func.apply(this, allArguments);
     }
-}
+  }

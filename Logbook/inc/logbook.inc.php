@@ -24,6 +24,17 @@
 	        return $db->lastInsertID();
 		}
 
+		public function getUserID(){
+			return $this->userID;
+		}
+
+		public function delete(){
+			$db = DB::getInstance();
+	        $stmt = $db->prepare("DELETE FROM `logbooks` WHERE `id` = ?");
+	        $stmt->bindParam(1, $this->id);
+	        $stmt->execute();
+		}
+
 		function getID(){
 			return $this->id;
 		}
