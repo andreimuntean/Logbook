@@ -54,7 +54,7 @@ $(document).ready(function(){
 	})
 
 	//logout
-	$("#logoutButton").click(function(){
+	$("#sign-out-button").click(function(){
 		$.ajax({
  			url:"inc/login.php",
  			type:"post",
