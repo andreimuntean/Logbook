@@ -29,15 +29,14 @@ session_start();
 
   <div class="contentContainer">
     <div class="header">
+
       <h2 style="float:left; margin-top:9px">
-        <span style="color:#43BE64; font-weight:bold">My</span>Logbook
-      </h2>
+        <span style="color:#43BE64; font-weight:bold">My</span>Logbook</h2>
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
-      <img id="logoutButton" class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
-      <img class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
-      <img class="navbarIconRight" src="assets/logbook-page/placeholder-icon-green.jpg">
-      <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:13px"><?php echo $user->getUsername();?></h3>
-      <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png">
+      <button type="button" class="navbarButton1 greenGradient" id ="sign-out-button">Sign Out</button>
+      <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:16px"><b><?php echo $user->getUsername();?></b></h3>
+      <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png" onclick="togglePopUp(true, 'profileSettings')">
+
     </div>
   </div>
 
@@ -92,6 +91,8 @@ session_start();
   <!-- These divs contain the logbook settings popup and opacity blanket. They
        are not visible until a new logbook is created. -->
   <div class="blanket", id="blanket"></div>
+
+  <!-- Logbook settings popup -->
   <div class="popUp", id="settings">
 
     <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
@@ -164,6 +165,68 @@ session_start();
         onclick="saveLogbookSettings()">Save</button>
 
     </div>
+
+  </div>
+
+  <!-- Profile settings popup -->
+  <div class="popUp", id="profileSettings">
+
+    <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
+
+      <h2 style="float:left">Profile Settings</h2>
+      <button class="closeButton" type="button" style="background-color: #E2E2E2"
+        onClick="togglePopUp(false, 'profileSettings')">
+      </button>
+
+    </div>
+
+    <div style="width:500px; font-size:16px">
+
+      <form>
+
+        <div>
+          <label for="profilePicture" style="width:100px"><b>Picture</b></label>
+          <img id='profilePicture' style="margin-bottom:18px; vertical-align:top;
+            position:relative; left:calc(50% - 165px); height:120px; width:120px"
+            src="assets/logbook-page/profile-pic.png">
+        </div>
+
+        <div style="height:52px">
+          <button type="button" class="greyGradient" style="margin:0 0 18px 0;
+            padding:0; position:relative; left:calc(50% - 60px); width:120px"
+            id="profile-pic-button">Change profile picture</button>
+        </div>
+
+        <div>
+          <label for="profileName" style="width:100px"><b>Username</b></label>
+          <input id='profileName' style="height:28px; padding-left:8px;
+            margin-left:10px; font-size:16px" size=30>
+        </div>
+
+        <div>
+          <label for="profileEmail" style="width:100px"><b>Email</b></label>
+          <input id='profileEmail' style="height:28px; padding-left:8px;
+            margin-left:10px; font-size:16px" size=30>
+        </div>
+
+        <div>
+          <label for="profilePassword" style="width:100px"><b>Password</b></label>
+          <input id='profilePassword' style="height:28px; padding-left:8px;
+            margin-left:10px; font-size:16px" size=30>
+        </div>
+
+    </div>
+
+    <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
+
+      <button class="navbarButton1 redGradient" style="float:left; margin:0"
+        onclick="togglePopUp(false, 'profileSettings')">Cancel</button>
+      <button class="navbarButton1 greenGradient", style="float:right; margin:0"
+        onclick="togglePopUp(false, 'profileSettings')">Save</button>
+
+    </div>
+
+  </div>
 
 </body>
 
