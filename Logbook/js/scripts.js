@@ -135,7 +135,7 @@ function saveEntry ()
   // Save the text inside the log.
   textArea.remove();
   var entryContentID = (editEntry.id).substring(0, (editEntry.id).length - 1) + "C";
-  document.getElementById(entryContentID).innerHTML += "\n" + textToSave;
+  document.getElementById(entryContentID).innerHTML += textToSave;
   document.getElementById(entryContentID).appendChild (sectionBreak);
 
   // Re-enable the create log button.
@@ -179,6 +179,45 @@ function editEntry (buttonId)
   // Adding the text area.
   var entryContentID = buttonId.substring(0, buttonId.length - 1) + "C";
   document.getElementById(entryContentID).appendChild (entryTextArea);
+}
+
+// This function generates a log so that it can be pulled from the server.
+function generatePulledLog()
+{
+  var entryDiv      = document.createElement ("div");
+  var entryHeader   = document.createElement ("div");
+  var entryContent  = document.createElement ("div");
+  var entryID       = "entry" + idCounter;
+  var editEntry    = document.createElement("span");
+  var sectionBreak = document.createElement("hr");
+
+  // Creates the container div and sets its id so the other divs can be placed
+  // inside.
+  entryDiv.setAttribute ("class", "entryContainer");
+  entryDiv.id = entryID;
+  document.getElementById("logbookEditorSpace").appendChild (entryDiv);
+
+  // Adds the inner divs inside of the new container div.
+  entryHeader.setAttribute ("class", "entryHeader");
+  entryHeader.innerHTML = "More test text";
+
+  entryContent.setAttribute ("class", "entryContent");
+  document.getElementById(entryID).appendChild (entryHeader);
+  entryHeader.id = entryID + "H";
+  document.getElementById(entryID).appendChild (entryContent);
+  entryContent.id = entryID + "C";
+
+  // Create an edit button.
+  entryHeader.appendChild(editEntry);
+  editEntry.id = editEntry.parentNode.parentNode.id + "E";
+  editEntry.setAttribute("onclick", "editEntry(this.id)");
+  editEntry.setAttribute("class", "editButton");
+  editEntry.innerHTML = "Edit";
+
+  entryContent.innerHTML = "Text pulled from server here";
+  entryContent.appendChild(sectionBreak);
+
+  idCounter++;
 }
 
 // Opens the logbook settings popup.
