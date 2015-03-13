@@ -73,7 +73,7 @@ function createLogbookEntry ()
   {
     editArray[editInstance].removeAttribute("onclick");
     editArray[editInstance].setAttribute("style", "color: #9B9EA2");
-  } 
+  }
 
   var entryDiv      = document.createElement ("div");
   var entryHeader   = document.createElement ("div");
@@ -114,13 +114,14 @@ function createLogbookEntry ()
 }
 
 // Code that gets executed when you save an entry
-function saveEntry () 
+function saveEntry ()
 {
-  var editEntry = document.createElement("span");
-  var saveEntry = document.getElementById("currentSaveButton");
-  var textArea = document.getElementById("currentTextArea");
-  var textToSave = textArea.value;
-  
+  var editEntry    = document.createElement("span");
+  var saveEntry    = document.getElementById("currentSaveButton");
+  var textArea     = document.getElementById("currentTextArea");
+  var sectionBreak = document.createElement("hr");
+  var textToSave   = textArea.value;
+
   // Create an edit button.
   saveEntry.parentNode.appendChild(editEntry);
   editEntry.id = editEntry.parentNode.parentNode.id + "E";
@@ -135,6 +136,7 @@ function saveEntry ()
   textArea.remove();
   var entryContentID = (editEntry.id).substring(0, (editEntry.id).length - 1) + "C";
   document.getElementById(entryContentID).innerHTML += "\n" + textToSave;
+  document.getElementById(entryContentID).appendChild (sectionBreak);
 
   // Re-enable the create log button.
   document.getElementById("createLogbookEntryButton").disabled = false;
@@ -156,7 +158,7 @@ function editEntry (buttonId)
   {
     editArray[editInstance].removeAttribute("onclick");
     editArray[editInstance].setAttribute("style", "color: #9B9EA2");
-  } 
+  }
 
   var entryTextArea = document.createElement ("textarea");
   var saveEntry     = document.createElement ("span");
@@ -332,4 +334,4 @@ $(document).ready(function(){
       }
     })
   })
-}) 
+})
