@@ -117,7 +117,7 @@ div.logbookContainer {
 }
 
 div.entryContainer {
-  height: 134px;
+  min-height: 134px;
   width: 680px;
   margin-bottom: 15px;
 }
@@ -135,10 +135,11 @@ div.entryHeader {
 }
 
 div.entryContent {
+  font-size: 14px;
   min-height: 80px;
   width: 644px;
   background-color: #333840;
-  color: #FFFFFF;
+  color: #9B9EA2;
   padding: 10px 18px 10px 18px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -313,6 +314,13 @@ img.navbarProfilePic {
 }
 
 span.saveButton {
+  float: right;
+  text-decoration: none;
+  color:#43BE64;
+  font-size: 13px;
+}
+
+span.editButton {
   float: right;
   text-decoration: none;
   color:#43BE64;
