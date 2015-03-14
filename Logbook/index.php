@@ -38,11 +38,10 @@
     <div class="contentContainer">
 
       <div class="bigThing" style="width:600px; float:left">
-        <h1 style="color:#EEF3F8">Lorem ipsum dolor sit amet.</h1>
-        <p>Wot the fok did ye just say 2 me m8? i dropped out of newcastle
-          primary skool im the sickest bloke ull ever meet & ive nicked ova 300
-          chocolate globbernaughts frum tha corner shop. im trained in street
-          fitin' & im the strongest foker in tha entire newcastle gym.</p>
+        <h1 style="color:#EEF3F8">The future of Logbooks is here.</h1>
+        <p>Instantly accessible by computer or mobile device, MyLogbook is an
+           indispensible tool for the modern programmer to plan their projects
+           before realising them. Start now by signing up.</p>
       </div>
 
       <div class="bigThing" style="width:350px; float:right">
@@ -64,50 +63,55 @@
 
     <div class="bigThing">
       <h2>Why you'll love MyLogbook.</h2>
-      <p>Something something pootis pootis pootis</p>
     </div>
 
     <div class="contentContainer-90">
       <div class="bigThing" style="height:800px">
 
         <div class="advert" style="float:left">
-          <img src="assets/landing-page/spurdo_face.png"
-            style="width:137px; height:105px; margin-top:10px">
-          <h3>Lorem ipsum dolor sit amet</h3>
-          <p class="small">Flip floppity wib wab gensheru alaris sydomir padp
-            amsa mfpomva pqmena xzmncan knaosjfna kjsanfojka snuais</p>
+          <img src="assets/landing-page/Interconnectivity_Graphic.png"
+            style="width:250px; height:150px; margin-top:10px">
+          <h3>Interconnectivity</h3>
+          <p class="small">Access and edit your programming logs anywhere and
+            everywhere, whether at college, work, home or even on the go.</p>
         </div>
 
         <div class="advert" style="float:right">
-          <img src="assets/landing-page/spurdo_face.png"
-            style="width:137px; height:105px; margin-top:10px">
-          <h3>Lorem ipsum dolor sit amet</h3>
-          <p class="small">Flip floppity wib wab gensheru alaris sydomir padp
-            amsa mfpomva pqmena xzmncan knaosjfna kjsanfojka snuais</p>
+          <img src="assets/landing-page/Group_Graphic.png"
+            style="width:250px; height:150px; margin-top:10px">
+          <h3>Group Sharing</h3>
+          <p class="small">Share your logbooks with others. Collabarate using
+            each others plans on team projects to build further than ever.</p>
         </div>
 
         <div class="advert" style="float:left">
-          <img src="assets/landing-page/spurdo_face.png"
-            style="width:137px; height:105px; margin-top:10px">
-          <h3>Lorem ipsum dolor sit amet</h3>
-          <p class="small">Flip floppity wib wab gensheru alaris sydomir padp
-            amsa mfpomva pqmena xzmncan knaosjfna kjsanfojka snuais</p>
+          <img src="assets/landing-page/Keyboard_Graphic.png"
+            style="width:250px; height:150px; margin-top:10px">
+          <h3>Simple, Clean UI</h3>
+          <p class="small">Our uncluttered, tidy log editor and automatic
+            formatting options for logs make a welcome change from untidy,
+            indecipherable scribbles of the old.</p>
         </div>
 
         <div class="advert" style="float:right">
-          <img src="assets/landing-page/spurdo_face.png"
-            style="width:137px; height:105px; margin-top:10px">
-          <h3>Lorem ipsum dolor sit amet</h3>
-          <p class="small">Flip floppity wib wab gensheru alaris sydomir padp
-            amsa mfpomva pqmena xzmncan knaosjfna kjsanfojka snuais</p>
+          <img src="assets/landing-page/Burning_Page_Graphic.png"
+            style="width:250px; height:150px; margin-top:10px">
+          <h3>Data Backup</h3>
+          <p class="small">All of your data is backed up safely and securely on
+            our servers, protecting them from physical harm. Never lose your
+            logs again.</p>
         </div>
 
       </div>
     </div>
 
     <div class="bigThing" style="height:800px">
-      <h2>Lorem ipsum spurdo sparde</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adispiscing elit</p>
+      <h2>Still unsure what should go here</h2>
+      <p>Perhaps we could put several website reviews from ourselves in this
+         area, like <a href="https://eleks.github.io/js2js/">this</a></p>
+      <p>Another idea is to take a pic of ourselves (Silicon Valley Tv show
+        <a href="https://d1oi7t5trwfj5d.cloudfront.net/ef/cd/b83bb1864a1d9b9c3c0e45551720/silicon-valley-poster.jpg">style</a>) and just slap it there or something? I don't know
+        what the hell I am rambling about.</p>
     </div>
 
     <p class="verySmall" style="margin-bottom:8px;">&copy;
