@@ -121,6 +121,11 @@ function saveEntry ()
   var textArea     = document.getElementById("currentTextArea");
   var sectionBreak = document.createElement("hr");
   var textToSave   = textArea.value;
+  var date         = "PlaceholderDate";
+  var time         = "PlaceholderTime";
+
+  // Add the date an time tag.
+  textToSave = "<span style=\"color: #FFFFFF\">[" + date + " | " + time + "]:</span> " + textToSave;
 
   // Create an edit button.
   saveEntry.parentNode.appendChild(editEntry);
@@ -182,7 +187,7 @@ function editEntry (buttonId)
 }
 
 // This function generates a log so that it can be pulled from the server.
-function generatePulledLog()
+function generatePulledLog(textToSave)
 {
   var entryDiv      = document.createElement ("div");
   var entryHeader   = document.createElement ("div");
@@ -214,7 +219,7 @@ function generatePulledLog()
   editEntry.setAttribute("class", "editButton");
   editEntry.innerHTML = "Edit";
 
-  entryContent.innerHTML = "Text pulled from server here";
+  entryContent.innerHTML = textToSave;
   entryContent.appendChild(sectionBreak);
 
   idCounter++;
