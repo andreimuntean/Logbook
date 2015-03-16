@@ -23,6 +23,13 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="js/notify.min.js"></script>
   <script language="JavaScript" src="js/scripts.js"></script>
+  <script type="text/javascript" src="tinymce/js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript">
+  tinyMCE.init({
+    mode: "none",
+    theme : "simple"
+  });
+  </script>
 </head>
 
 <body style="height:100vh">

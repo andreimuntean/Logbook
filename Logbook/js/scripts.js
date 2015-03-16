@@ -1,5 +1,7 @@
 // Global utility scripts go here.
 
+//$.getScript("tinymce/js/tinymce/tinymce.min.js");
+
 function addLogbookToDB(logbookName, logbookPrivacy){
     $.ajax({
             url:"inc/logbook.php",
@@ -37,7 +39,6 @@ var currentLogbookID = 0;
 // Creates a logbook and settings button in the left selection pane.
 function createLogbook (logbookName, logbookID)
 {
-  /*var logbookID       = "logbook" + logbookIDCounter;*/
   var logbookDiv      = document.createElement ("div");
   var logbookButton   = document.createElement ("button");
   var settingsButton  = document.createElement ("button");
@@ -106,6 +107,7 @@ function createLogbookEntry ()
 
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
+  tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
 
   saveEntry.innerHTML = "Save";
 
@@ -259,7 +261,6 @@ function deleteLogbook ()
 {
 	togglePopUp (false, 'settings')
 	// If false, the logbook is a preexisting one and must be removed.
-	// NOTE: Insert some code here that can remove a logbook from server!
 	if (!createNewLogbook)
 	{
     deleteLogbookfromDB(currentLogbookID);
@@ -288,6 +289,8 @@ function openLogbookSettings (logbookID)
 
 
 $(document).ready(function(){
+
+
 	$("#signUpButton").click(function(){
 		var username = $("input[name='username']").val();
 		var email = $("input[name='email']").val();
