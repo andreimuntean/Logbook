@@ -84,7 +84,8 @@ session_start();
 
   <div class="contentContainer" align="center">
     <p class="verySmall" style="margin-top:2px; margin-bottom:2px;">&copy;
-      2015 Z5 | <a>Terms</a> <a>Privacy</a> <a>About</a>
+      2015 Z5 | <a href="terms.php">Terms</a> <a href="faq.php">FAQ</a>
+      <a href="about.php">About</a>
     </p>
   </div>
 

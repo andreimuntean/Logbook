@@ -96,7 +96,7 @@ div.logbookSelectionPane {
 }
 
 div.logbookEditor {
-  width: 702px;
+  width: 722px;
   margin-left: auto;
   margin-right: auto;
   overflow-y: scroll;
@@ -270,7 +270,7 @@ button.closeButton {
   border-width: 2px;
   border-style: dashed;
   height: 80px;
-  width:680px;
+  width: 680px;
   padding-left:24px;
 }
 

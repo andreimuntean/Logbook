@@ -115,7 +115,7 @@
     </div>
 
     <p class="verySmall" style="margin-bottom:8px;">&copy;
-      2015 Z5 | <a>Terms</a> <a>Privacy</a> <a>About</a>
+      2015 Z5 | <a>Terms</a> <a>FAQ</a> <a>About</a>
     </p>
 
   </div>
