@@ -2,6 +2,7 @@
 
 //$.getScript("tinymce/js/tinymce/tinymce.min.js");
 
+
 function addLogbookToDB(logbookName, logbookPrivacy){
     $.ajax({
             url:"inc/logbook.php",
@@ -12,8 +13,9 @@ function addLogbookToDB(logbookName, logbookPrivacy){
                 "action":"new"
             }
     }).done(function(response){
+       response = response.trim();
         createLogbook(logbookName, response)
-            console.log(response);
+        window.currentLogbookID =response;
     })
 }
 
@@ -26,9 +28,30 @@ function deleteLogbookfromDB(logbookID){
                 "action":"delete"
             }
     }).done(function(response){
+       response = response.trim();
             console.log(response);
     })
 }
+
+function saveEntryToDB(currentLogbookID){
+   var content = tinyMCE.get('content');
+    content = content.getContent();
+   console.log("content: "+content);
+   $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "id":currentLogbookID,
+                "content": content,
+                "action":"newEntry"
+            }
+    }).done(function(response){
+       response = response.trim();
+      //id of new created log entry
+      $(".logbookContainer[id=" + response + "]").children(".logbookButton").click();
+    })
+}
+
 
 var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
 var idCounter = 0;            // Keeps track of the id number given to logbook entries.
@@ -107,15 +130,25 @@ function createLogbookEntry ()
 
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
-  tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
+  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
+  tinyMCE.init({
+    mode: "textareas",
+    selector: "textarea"
+  });
 
   saveEntry.innerHTML = "Save";
-
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
 }
 
+
+
+
+
+
 // Code that gets executed when you save an entry
+//just delete SEB_ for Seb's
+
 function saveEntry ()
 {
   var editEntry    = document.createElement("span");
@@ -154,6 +187,7 @@ function saveEntry ()
     editArray[editInstance].setAttribute("onclick", "editEntry(this.id)");
     editArray[editInstance].removeAttribute("style");
   }
+   saveEntryToDB(window.currentLogbookID);
 }
 
 function editEntry (buttonId)
@@ -290,7 +324,8 @@ function openLogbookSettings (logbookID)
 
 $(document).ready(function(){
 
-
+  //global varibale currentLogbookID
+  window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){
 		var username = $("input[name='username']").val();
 		var email = $("input[name='email']").val();
@@ -381,4 +416,29 @@ $(document).ready(function(){
       }
     })
   })
+
+
+  $(".logbookButton").click(function(){
+    var logbookID = $(this).parent().attr("id");
+    if(!$.isNumeric(logbookID))
+      return false;
+    window.currentLogbookID = logbookID;
+     $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "id":logbookID,
+                "action":"showAllEntries"
+            }
+    }).done(function(response){
+      $("#logbookEditorSpace").html(response);
+    })
+  })
+
+  $(".saveButton").click(function(){
+    saveEntryToDB(window.currentLogbookID);
+  })
+
+
+
 })

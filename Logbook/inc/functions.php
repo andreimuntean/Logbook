@@ -72,10 +72,8 @@
 
     function insertToken($token){
     	$db = DB::getInstance();
-    	//echo $token;
     	//one week later
 		$expire_date = date(time()+604800);
-		//echo $expire_date;
 		$stmt = $db->prepare("INSERT INTO `confirm_tokens`(`token`, `expire_date`) VALUES(?, ?)");
     	$stmt->bindParam(1, $token);
     	$stmt->bindParam(2, $expire_date);

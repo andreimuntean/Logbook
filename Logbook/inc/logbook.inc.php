@@ -24,6 +24,28 @@
 	        return $db->lastInsertID();
 		}
 
+		public function addContent($content){
+			$db = DB::getInstance();
+			$logbookID = $this->getID();
+			$userID = $this->getUserID();
+	        $stmt = $db->prepare("INSERT INTO `logs`(`logbook_id`, `content`, `date`, `user_id`) VALUES(?, ?, ?, ?)");
+	        $stmt->bindParam(1, $logbookID);
+	        $stmt->bindParam(2, $content);
+	        $stmt->bindParam(3, date('Y-m-d H:i:s'));
+	        $stmt->bindParam(4, $userID);
+	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
+	        $stmt->execute();
+	        return $db->lastInsertID();
+		}
+
+		public function getAllEntries(){
+			$db = DB::getInstance();
+			$logbookID = $this->getID();
+			return $db->query("SELECT * FROM `logs` WHERE `logbook_id` = $logbookID");
+		}
+
+
+
 		public function getUserID(){
 			return $this->userID;
 		}
@@ -35,9 +57,11 @@
 	        $stmt->execute();
 		}
 
-		function getID(){
+		public function getID(){
 			return $this->id;
 		}
+
+
 	}
 ?>
 
