@@ -21,6 +21,18 @@
 		function getID(){
 			return $this->id;
 		}
+
+		function getIDfromUsername($username){
+			$db = DB::getInstance();
+			$stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ?");
+			$stmt->bindParam(1, $username);
+			$stmt->execute();
+	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+	        foreach($result as $row){
+	        	return $row['id'];
+	        }
+	        return 0;
+		}
 	}
 ?>
 

@@ -51,5 +51,18 @@ session_start();
 				</div>';
 		}
 	}
+	elseif($action == "share"){
+		$username = isset($_POST['username'])?$_POST['username']:"";
+		$contributorID = User::getIDfromUsername($username);
+		if($contributorID == 0)
+			echo "Couldn't find such user";
+		else{
+			$logbook = new Logbook($id);
+			if($logbook->getUserID() == $user->getID()){
+				$logbook->share($contributorID);
+				echo "Logbook is now shared with ".$username;
+			}
+		}
+	}
 ?>
 

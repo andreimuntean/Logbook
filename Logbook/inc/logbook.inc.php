@@ -44,6 +44,24 @@
 			return $db->query("SELECT * FROM `logs` WHERE `logbook_id` = $logbookID");
 		}
 
+		public function hasAccess($userID){
+			$db = DB::getInstance();
+			$logbookID = $this->getID();
+			$res = $db->query("SELECT * FROM `accesses` WHERE logbook_id = $logbookID");
+			foreach($res as $row){
+				if($row['user_id']==$userID)
+					return true;
+			}
+			return false;
+
+		}
+
+		public function share($userID){
+			$db = DB::getInstance();
+			$logbookID = $this->getID();
+			$db->exec("INSERT INTO `accesses`(`logbook_id`, `user_id`, `level`) VALUES($logbookID, $userID, 1)");
+		}
+
 
 
 		public function getUserID(){
@@ -55,6 +73,7 @@
 	        $stmt = $db->prepare("DELETE FROM `logbooks` WHERE `id` = ?");
 	        $stmt->bindParam(1, $this->id);
 	        $stmt->execute();
+	        $db->exec("DELETE FROM `accesses` WHERE `logbook_id` = $id");
 		}
 
 		public function getID(){
