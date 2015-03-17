@@ -55,8 +55,9 @@ session_start();
         style="float:left; height:100%">
 
         <div class="logbookContainer">
-          <button type="button" class="logbookButton" id="createLogbookButton"
-            onclick="togglePopUp(true, 'settings'); createNewLogbook = true;">New Logbook...
+          <button type="button" class="logbookButton" style="background:none"
+            id="createLogbookButton" onclick="togglePopUp(true, 'settings');
+            createNewLogbook = true;">New Logbook...
           </button>
         </div>
 
@@ -80,7 +81,7 @@ session_start();
 
         <div id="logbookEditorSpace" style="min-height:calc(100% - 85px)"></div>
 
-        <button type="button" class="logbookButton"
+        <button type="button" class="logbookButton" style="background:none"
           id="createLogbookEntryButton" onClick="createLogbookEntry()">
           New Logbook Entry...</button>
 
@@ -122,18 +123,20 @@ session_start();
             margin-left:10px; font-size:16px" size=30>
         </div>
 
-        <div>
+        <!--<div>
           <label for="visibility" style="width:120px"><b>Visibility</b></label>
           <select id='visibility' style="font-size:16px; margin-left:10px;">
             <option value="0">Public</option>
             <option value="1">Private</option>
           </select>
-        </div>
+        </div>-->
 
         <div>
-          <label for='groupLogbook' style="width:120px"><b>Group Logbook</b></label>
-          <input id='groupLogbook' type="checkbox" style="height:16px; width:16px;
-            margin:0 0 0 10px" value="group">
+          <label for='addUsers' style="width:120px"><b>Add Users...</b></label>
+          <input id='addUsers' style="height:28px; padding-left:8px;
+            margin-left:10px; font-size:16px" size=30>
+          <button class="greyGradient" type="button" id='addUserButton' style="height:28px;
+            width:28px">+</button>
         </div>
 
       </form>
@@ -161,6 +164,11 @@ session_start();
       <div>
         <label for="entryNum" style="width:120px"><b>Entries</b></label>
         <p id='entryNum' style="margin-left:10px"></p>
+      </div>
+
+      <div>
+        <label for="logbookUsers" style="width:120px"><b>Users</b></label>
+        <p id='logbookUsers' style="margin-left:10px"></p>
       </div>
 
     </div>

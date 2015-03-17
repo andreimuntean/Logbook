@@ -74,7 +74,11 @@ function createLogbook (logbookName, logbookID)
   // Creates the logbook button and adds it to the new div.
   logbookButton.setAttribute ("class", "logbookButton");
   logbookButton.setAttribute ("type", "button");
-  logbookButton.innerHTML = /*"Test text";*/ logbookName;
+  // Creates a trailing name if name length is too long.
+  if (logbookName.length > 10) {
+    logbookName = logbookName.substr(0, 10) + '...';
+  }
+  logbookButton.innerHTML = logbookName;
   document.getElementById(logbookID).appendChild (logbookButton);
 
   // Creates the logbook settings button and adds it as well.
@@ -140,10 +144,6 @@ function createLogbookEntry ()
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
 }
-
-
-
-
 
 
 // Code that gets executed when you save an entry
