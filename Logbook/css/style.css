@@ -228,10 +228,6 @@ button.logbookButton {
   height: 50px;
   width: 162px;
   background-color: #393F48;
-  background-image: url(../assets/logbook-page/user-icon.png);
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 10px) 50%;
   float: left;
 }
 
@@ -334,5 +330,5 @@ span.editButton {
 textarea.entryTextArea {
   resize: none;
   width: 640px;
-  height: 80px;
+  min-height: 80px;
 }
