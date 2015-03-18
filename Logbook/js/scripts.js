@@ -33,7 +33,7 @@ function deleteLogbookfromDB(logbookID){
     })
 }
 
-function saveEntryToDB(currentLogbookID){
+function saveEntryToDB(currentLogbookID, content){
    //var content = tinyMCE.get('content');
   //  content = content.getContent();
    console.log("content: "+content);
@@ -94,6 +94,8 @@ function createLogbook (logbookName, logbookID)
 // Creates a logbook entry in the right editor pane.
 function createLogbookEntry ()
 {
+     if($("#currentTextArea").length)  
+     return false;     
   document.getElementById("createLogbookEntryButton").disabled = true;
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
@@ -134,7 +136,13 @@ function createLogbookEntry ()
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
 	autosize(document.querySelectorAll('textarea'));
-
+  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')  
+   tinyMCE.remove();     
+   tinyMCE.init({      
+     mode: "textareas",      
+     selector: "textarea"            
+   });
+    autosize(document.querySelectorAll('textarea'));
   saveEntry.innerHTML = "Save";
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
@@ -146,6 +154,12 @@ function createLogbookEntry ()
 
 function saveEntry ()
 {
+   tinymce.triggerSave();  
+   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());      
+   tinymce.remove();     
+  $("#currentTextArea").hide();
+   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();      
+   /*
   var editEntry    = document.createElement("span");
   var saveEntry    = document.getElementById("currentSaveButton");
   var textArea     = document.getElementById("currentTextArea");
@@ -181,6 +195,7 @@ function saveEntry ()
     editArray[editInstance].removeAttribute("style");
   }
    saveEntryToDB(window.currentLogbookID);
+   */
 }
 
 function editEntry (buttonId)
@@ -427,10 +442,6 @@ $(document).ready(function(){
     }).done(function(response){
       $("#logbookEditorSpace").html(response);
     })
-  })
-
-  $(".saveButton").click(function(){
-    saveEntryToDB(window.currentLogbookID);
   })
 
 
