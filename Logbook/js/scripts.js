@@ -34,8 +34,8 @@ function deleteLogbookfromDB(logbookID){
 }
 
 function saveEntryToDB(currentLogbookID){
-   var content = tinyMCE.get('content');
-    content = content.getContent();
+   //var content = tinyMCE.get('content');
+  //  content = content.getContent();
    console.log("content: "+content);
    $.ajax({
             url:"inc/logbook.php",
@@ -95,7 +95,6 @@ function createLogbook (logbookName, logbookID)
 function createLogbookEntry ()
 {
   document.getElementById("createLogbookEntryButton").disabled = true;
-  document.getElementById("createLogbookEntryButton").setAttribute("style", "background-color: #393F48");
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -134,11 +133,7 @@ function createLogbookEntry ()
 
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
-  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
-  tinyMCE.init({
-    mode: "textareas",
-    selector: "textarea"
-  });
+	autosize(document.querySelectorAll('textarea'));
 
   saveEntry.innerHTML = "Save";
   // idCounter is incremented (guarantees each entry id is unique).
@@ -156,11 +151,10 @@ function saveEntry ()
   var textArea     = document.getElementById("currentTextArea");
   var sectionBreak = document.createElement("hr");
   var textToSave   = textArea.value;
-  var date         = "PlaceholderDate";
-  var time         = "PlaceholderTime";
+  var date         = Date().substr(0, 24);
 
   // Add the date an time tag.
-  textToSave = "<span style=\"color: #FFFFFF\">[" + date + " | " + time + "]:</span> " + textToSave;
+  textToSave = "<span style=\"color: #FFFFFF\">[" + date + "]</span>" + "<br>" + textToSave;
 
   // Create an edit button.
   saveEntry.parentNode.appendChild(editEntry);
@@ -180,7 +174,6 @@ function saveEntry ()
 
   // Re-enable the create log button.
   document.getElementById("createLogbookEntryButton").disabled = false;
-  document.getElementById("createLogbookEntryButton").setAttribute("style", "background-color: #2d3239");
   var editArray =  document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -193,7 +186,6 @@ function saveEntry ()
 function editEntry (buttonId)
 {
   document.getElementById("createLogbookEntryButton").disabled = true;
-  document.getElementById("createLogbookEntryButton").setAttribute("style", "background-color: #393F48");
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -220,6 +212,7 @@ function editEntry (buttonId)
   // Adding the text area.
   var entryContentID = buttonId.substring(0, buttonId.length - 1) + "C";
   document.getElementById(entryContentID).appendChild (entryTextArea);
+  autosize(document.querySelectorAll('textarea'));
 }
 
 // This function generates a log so that it can be pulled from the server.
@@ -313,18 +306,19 @@ function openLogbookSettings (logbookID)
 /* Code taken from: 'http://blog.dreasgrech.com/2009/11/passing-pointer-to-functi
  * on-with.html'. It allows a function reference to be passed with parameters.*/
 
-  var partial = function (func /*, 0..n args */) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return function () {
-        var allArguments = args.concat(Array.prototype.slice.call(arguments));
-        return func.apply(this, allArguments);
-    }
+var partial = function (func /*, 0..n args */) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return function () {
+      var allArguments = args.concat(Array.prototype.slice.call(arguments));
+      return func.apply(this, allArguments);
   }
+}
 
 
 $(document).ready(function(){
 
   //global varibale currentLogbookID
+  $.getScript ("autosize-master/src/autosize.js");
   window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){
 		var username = $("input[name='username']").val();
