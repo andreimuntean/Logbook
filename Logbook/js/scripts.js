@@ -94,8 +94,8 @@ function createLogbook (logbookName, logbookID)
 // Creates a logbook entry in the right editor pane.
 function createLogbookEntry ()
 {
-     if($("#currentTextArea").length)  
-     return false;     
+     if($("#currentTextArea").length)
+     return false;
   document.getElementById("createLogbookEntryButton").disabled = true;
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
@@ -135,14 +135,12 @@ function createLogbookEntry ()
 
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
-	autosize(document.querySelectorAll('textarea'));
-  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')  
-   tinyMCE.remove();     
-   tinyMCE.init({      
-     mode: "textareas",      
-     selector: "textarea"            
+  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
+   tinyMCE.remove();
+   tinyMCE.init({
+     mode: "textareas",
+     selector: "textarea"
    });
-    autosize(document.querySelectorAll('textarea'));
   saveEntry.innerHTML = "Save";
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
@@ -154,11 +152,11 @@ function createLogbookEntry ()
 
 function saveEntry ()
 {
-   tinymce.triggerSave();  
-   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());      
-   tinymce.remove();     
+   tinymce.triggerSave();
+   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());
+   tinymce.remove();
   $("#currentTextArea").hide();
-   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();      
+   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
    /*
   var editEntry    = document.createElement("span");
   var saveEntry    = document.getElementById("currentSaveButton");
@@ -227,7 +225,6 @@ function editEntry (buttonId)
   // Adding the text area.
   var entryContentID = buttonId.substring(0, buttonId.length - 1) + "C";
   document.getElementById(entryContentID).appendChild (entryTextArea);
-  autosize(document.querySelectorAll('textarea'));
 }
 
 // This function generates a log so that it can be pulled from the server.
@@ -333,7 +330,6 @@ var partial = function (func /*, 0..n args */) {
 $(document).ready(function(){
 
   //global varibale currentLogbookID
-  $.getScript ("autosize-master/src/autosize.js");
   window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){
 		var username = $("input[name='username']").val();
@@ -444,6 +440,28 @@ $(document).ready(function(){
     })
   })
 
-
+  // Handler for changing the user's profile picture
+  $("#upload-profile-pic").change(function() {
+    // Picture must pass each of the validation steps.
+    var val = $("#upload-profile-pic").val();
+    var form = new FormData($('profileSettingsForm')[0]);
+    if (!val.match(/(?:gif|jpg|png|jpeg)$/)) {
+      // inputted file path is not an image of one of the above types
+      alert("Image file must be of either GIF, JPG, PNG or JPEG formats");
+    } else if (this.files[0].size > 1000000) {
+      alert("Image file size must be less than 1MB");
+    } else {
+      // If validation is successful, image is stored.
+      $.ajax({
+        type:"post",
+        url:"inc/profilePicUpload.inc.php",
+        data:this.files[0],
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(res) { alert("Great Success! " + res); }
+      });
+    }
+  });
 
 })

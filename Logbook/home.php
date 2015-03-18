@@ -190,19 +190,22 @@ session_start();
 
     <div style="width:500px; font-size:16px">
 
-      <form>
+      <form id="profileSettingsForm">
 
         <div>
-          <label for="profilePicture" style="width:100px"><b>Picture</b></label>
-          <img id='profilePicture' style="margin-bottom:18px; vertical-align:top;
+          <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
+          <img id='profilePicturePreview' style="margin-bottom:18px; vertical-align:top;
             position:relative; left:calc(50% - 165px); height:120px; width:120px"
             src="assets/logbook-page/profile-pic.png">
         </div>
 
         <div style="height:52px">
+          <input type="file" id="upload-profile-pic" name="upload" style=
+	          "visibility:hidden; width:1px; height:1px">
           <button type="button" class="greyGradient" style="margin:0 0 18px 0;
-            padding:0; position:relative; left:calc(50% - 60px); width:120px"
-            id="profile-pic-button">Change profile picture</button>
+            padding:0; position:relative; left:calc(50% - 65px); width:120px"
+            onclick="document.getElementById('upload-profile-pic').click();
+            return false" id="profile-pic-button">Change profile picture</button>
         </div>
 
         <div>
