@@ -476,9 +476,12 @@ $(document).ready(function(){
 
   // Handler for changing the user's profile picture
   $("#upload-profile-pic").change(function() {
+    // The file and formdata is obtained
+    var file = document.getElementById("upload-profile-pic").files[0];
+    var formData = new FormData();
+    formData.append("image", file);
     // Picture must pass each of the validation steps.
     var val = $("#upload-profile-pic").val();
-    var form = new FormData($('profileSettingsForm')[0]);
     if (!val.match(/(?:gif|jpg|png|jpeg)$/)) {
       // inputted file path is not an image of one of the above types
       alert("Image file must be of either GIF, JPG, PNG or JPEG formats");
@@ -489,13 +492,12 @@ $(document).ready(function(){
       $.ajax({
         type:"post",
         url:"inc/profilePicUpload.inc.php",
-        data:this.files[0],
+        data: formData,
         cache: false,
         contentType: false,
         processData: false,
-        success: function(res) { alert("Great Success! " + res); }
+        success: function(res) { alert("Upload successful " + res); }
       });
     }
   });
-
 })

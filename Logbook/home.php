@@ -189,7 +189,7 @@ session_start();
 
     <div style="width:500px; font-size:16px">
 
-      <form id="profileSettingsForm">
+      <form id="profileSettingsForm" enctype="multipart/form-data">
 
         <div>
           <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
@@ -199,7 +199,7 @@ session_start();
         </div>
 
         <div style="height:52px">
-          <input type="file" id="upload-profile-pic" name="upload" style=
+          <input type="file" id="upload-profile-pic" name="image" style=
 	          "visibility:hidden; width:1px; height:1px">
           <button type="button" class="greyGradient" style="margin:0 0 18px 0;
             padding:0; position:relative; left:calc(50% - 65px); width:120px"
