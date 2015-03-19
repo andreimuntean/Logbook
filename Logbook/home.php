@@ -69,9 +69,8 @@
 	$userID = $user->getID();
 	foreach ($db->query("SELECT * FROM `accesses` WHERE `user_id` = $userID") as $row) {
     $logbook = new Logbook($row['logbook_id']);
-		echo "<script>createLogbook('".$logbook->name."', ".$logbook->id.")</script>";
+    echo "<script>createLogbook('".$logbook->name."', '".$logbook->id."')</script>";
   }
-
 ?>
 
       </div>

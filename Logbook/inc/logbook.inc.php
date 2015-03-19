@@ -19,7 +19,7 @@
 	        $stmt->bindParam(1, $name);
 	        $stmt->bindParam(2, $privacy);
 	        $stmt->bindParam(3, $userID);
-	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
+	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 	        $stmt->execute();
 	        $lastInsert = $db->lastInsertID();
 	        $this->share($userID);
@@ -35,7 +35,7 @@
 	        $stmt->bindParam(2, $content);
 	        $stmt->bindParam(3, date('Y-m-d H:i:s'));
 	        $stmt->bindParam(4, $userID);
-	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
+	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 	        $stmt->execute();
 	        $lastInsert = $db->lastInsertID();
 	        return $lastInsert;
@@ -74,10 +74,12 @@
 
 		public function delete(){
 			$db = DB::getInstance();
-	        $stmt = $db->prepare("DELETE FROM `logbooks` WHERE `id` = ?");
-	        $stmt->bindParam(1, $this->id);
-	        $stmt->execute();
-	        $db->exec("DELETE FROM `accesses` WHERE `logbook_id` = $id");
+      $stmt = $db->prepare("DELETE FROM `logbooks` WHERE `id` = ?");
+      $stmt->bindParam(1, $this->id);
+      $stmt->execute();
+			$stmt = $db->prepare("DELETE FROM `accesses` WHERE `logbook_id` = ?");
+			$stmt->bindParam(1, $this->id);
+      $stmt->execute();
 		}
 
 		public function getID(){
@@ -115,4 +117,3 @@
 
 	}
 ?>
-

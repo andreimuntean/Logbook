@@ -1,7 +1,11 @@
 // Global utility scripts go here.
 
-//$.getScript("tinymce/js/tinymce/tinymce.min.js");
-
+var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
+var idCounter = 0;            // Keeps track of the id number given to logbook entries.
+var logbooks = [];            // This keeps an array of every logbook created so far.
+var createNewLogbook = false; // Decides whether or not to create a new logbook when saving.
+var currentLogbookID = 0;
+var logbookFocus = -1;         // Contains the id of the logbook the user has selected currently.
 
 function searchLogbooks(token){
     $.ajax({
@@ -32,9 +36,6 @@ function searchUsers(token){
       // the url format should be logbook.php?user=21
     })
 }
-
-
-
 
 function addLogbookToDB(logbookName, logbookPrivacy){
     $.ajax({
@@ -67,8 +68,6 @@ function deleteLogbookfromDB(logbookID){
 }
 
 function saveEntryToDB(currentLogbookID, content){
-   //var content = tinyMCE.get('content');
-  //  content = content.getContent();
    console.log("content: "+content);
    $.ajax({
             url:"inc/logbook.php",
@@ -85,13 +84,6 @@ function saveEntryToDB(currentLogbookID, content){
     })
 }
 
-
-var logbookIDCounter = 0;     // Keeps track of the id number given to logbooks.
-var idCounter = 0;            // Keeps track of the id number given to logbook entries.
-var logbooks = [];            // This keeps an array of every logbook created so far.
-var createNewLogbook = false; // Decides whether or not to create a new logbook when saving.
-var currentLogbookID = 0;
-
 // Creates a logbook and settings button in the left selection pane.
 function createLogbook (logbookName, logbookID)
 {
@@ -107,9 +99,10 @@ function createLogbook (logbookName, logbookID)
   // Creates the logbook button and adds it to the new div.
   logbookButton.setAttribute ("class", "logbookButton");
   logbookButton.setAttribute ("type", "button");
+
   // Creates a trailing name if name length is too long.
-  if (logbookName.length > 10) {
-    logbookName = logbookName.substr(0, 10) + '...';
+  if (logbookName.length > 15) {
+    logbookName = logbookName.substr(0, 15) + '...';
   }
   logbookButton.innerHTML = logbookName;
   document.getElementById(logbookID).appendChild (logbookButton);
@@ -120,6 +113,10 @@ function createLogbook (logbookName, logbookID)
   settingsButton.onclick = partial (openLogbookSettings, logbookID);
   document.getElementById(logbookID).appendChild (settingsButton);
 
+  // Sets the logbook focus to this logbook and enables the create entry button.
+  changeLogbookFocus (logbookID);
+  document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
+
   // logbookIDCounter is incremented (guarantees each entry id is unique).
   logbookIDCounter++;
 }
@@ -127,9 +124,9 @@ function createLogbook (logbookName, logbookID)
 // Creates a logbook entry in the right editor pane.
 function createLogbookEntry ()
 {
-     if($("#currentTextArea").length)
-     return false;
-  document.getElementById("createLogbookEntryButton").disabled = true;
+  if($("#currentTextArea").length)
+    return false;
+  document.getElementById("createLogbookEntryButton").setAttribute("disabled", "disabled");
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -168,65 +165,29 @@ function createLogbookEntry ()
 
   entryHeader.appendChild (saveEntry);
   entryContent.appendChild (entryTextArea);
-  //tinyMCE.execCommand('mceAddControl', false, 'currentTextArea')
-   tinyMCE.remove();
-   tinyMCE.init({
-     mode: "textareas",
-     selector: "textarea"
-   });
+  tinyMCE.remove();
+  tinyMCE.init({
+   mode: "textareas",
+   selector: "textarea"
+  });
   saveEntry.innerHTML = "Save";
   // idCounter is incremented (guarantees each entry id is unique).
   idCounter++;
 }
 
-
-// Code that gets executed when you save an entry
-//just delete SEB_ for Seb's
-
 function saveEntry ()
 {
-   tinymce.triggerSave();
-   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());
-   tinymce.remove();
+  tinymce.triggerSave();
+  saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());
+  tinymce.remove();
   $("#currentTextArea").hide();
-   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
-   /*
-  var editEntry    = document.createElement("span");
-  var saveEntry    = document.getElementById("currentSaveButton");
-  var textArea     = document.getElementById("currentTextArea");
-  var sectionBreak = document.createElement("hr");
-  var textToSave   = textArea.value;
-  var date         = Date().substr(0, 24);
+  $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
+
+  // Re-enable the create log button.
+  document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
 
   // Add the date an time tag.
   textToSave = "<span style=\"color: #FFFFFF\">[" + date + "]</span>" + "<br>" + textToSave;
-
-  // Create an edit button.
-  saveEntry.parentNode.appendChild(editEntry);
-  editEntry.id = editEntry.parentNode.parentNode.id + "E";
-  editEntry.setAttribute("onclick", "editEntry(this.id)");
-  editEntry.setAttribute("class", "editButton");
-  editEntry.innerHTML = "Edit";
-
-  // Remove the save button.
-  document.getElementById("currentSaveButton").remove();
-
-  // Save the text inside the log.
-  textArea.remove();
-  var entryContentID = (editEntry.id).substring(0, (editEntry.id).length - 1) + "C";
-  document.getElementById(entryContentID).innerHTML += textToSave;
-  document.getElementById(entryContentID).appendChild (sectionBreak);
-
-  // Re-enable the create log button.
-  document.getElementById("createLogbookEntryButton").disabled = false;
-  var editArray =  document.getElementsByClassName("editButton");
-  for (var editInstance = 0; editInstance < editArray.length; editInstance++)
-  {
-    editArray[editInstance].setAttribute("onclick", "editEntry(this.id)");
-    editArray[editInstance].removeAttribute("style");
-  }
-   saveEntryToDB(window.currentLogbookID);
-   */
 }
 
 function editEntry (buttonId)
@@ -338,6 +299,10 @@ function deleteLogbook ()
     deleteLogbookfromDB(currentLogbookID);
 		var logbookToDelete = document.getElementById (currentLogbookID);
 		document.getElementById ("logbookSelectionPane").removeChild (logbookToDelete)
+    document.getElementById("createLogbookEntryButton").disabled = true;
+    tinyMCE.remove();
+    $(".entryContainer").remove();
+    changeLogbookFocus (-1);
 	}
 }
 
@@ -348,9 +313,20 @@ function openLogbookSettings (logbookID)
 	currentLogbookID = logbookID;
 }
 
+// Switches focus to a new logbook
+function changeLogbookFocus (newLogbookID)
+{
+  if (document.getElementById(logbookFocus) != null) {
+    document.getElementById(logbookFocus).childNodes[0].style.backgroundColor = "#393F48";
+  }
+  logbookFocus = newLogbookID;
+  if (document.getElementById(logbookFocus) != null) {
+    document.getElementById(logbookFocus).childNodes[0].style.backgroundColor = "#9B9EA2";
+  }
+}
+
 /* Code taken from: 'http://blog.dreasgrech.com/2009/11/passing-pointer-to-functi
  * on-with.html'. It allows a function reference to be passed with parameters.*/
-
 var partial = function (func /*, 0..n args */) {
   var args = Array.prototype.slice.call(arguments, 1);
   return function () {
@@ -358,7 +334,6 @@ var partial = function (func /*, 0..n args */) {
       return func.apply(this, allArguments);
   }
 }
-
 
 $(document).ready(function(){
   //$(".logbookEditor").niceScroll({ autohidemode: true })
@@ -456,23 +431,25 @@ $(document).ready(function(){
     })
   })
 
-
+  // Handler for when logbook button is clicked
   $(".logbookButton").click(function(){
-    var logbookID = $(this).parent().attr("id");
-    if(!$.isNumeric(logbookID))
-      return false;
-    window.currentLogbookID = logbookID;
-     $.ajax({
-            url:"inc/logbook.php",
-            type:"post",
-            data:{
-                "id":logbookID,
-                "action":"showAllEntries"
-            }
-    }).done(function(response){
-      $("#logbookEditorSpace").html(response);
-    })
-  })
+    if ($(this).attr("id") != "createLogbookButton") {
+      var logbookID = $(this).parent().attr("id");
+      changeLogbookFocus (logbookID);
+      if(!$.isNumeric(logbookID))
+        return false;
+      window.currentLogbookID = logbookID;
+       $.ajax({
+              url:"inc/logbook.php",
+              type:"post",
+              data:{
+                  "id":logbookID,
+                  "action":"showAllEntries"
+              }
+      }).done(function(response){
+        $("#logbookEditorSpace").html(response);
+      })
+    }})
 
   // Handler for changing the user's profile picture
   $("#upload-profile-pic").change(function() {
