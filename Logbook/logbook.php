@@ -3,13 +3,6 @@ include 'inc/db.inc.php';
 include 'inc/user.inc.php';
 include 'inc/logbook.inc.php';
 session_start();
-
-  if(!isset($_SESSION['user'])){
-    header("Location: index.php");
-    die();
-  }else{
-    $user = unserialize($_SESSION['user']);
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,25 +18,34 @@ session_start();
   <script src="js/notify.min.js"></script>
   <script language="JavaScript" src="js/scripts.js"></script>
   <script type="text/javascript" src="tinymce/js/tinymce/tinymce.min.js"></script>
-  <script type="text/javascript">
-  tinyMCE.init({
-    mode: "none",
-    theme : "simple"
-  });
-  </script>
 </head>
 
 <body style="height:100vh">
 
   <div class="contentContainer">
+   
     <div class="header">
+<?php 
+if(isset($_SESSION['user']))
+{
+  $user = unserialize($_SESSION['user']);
 
+?>
       <h2 style="float:left; margin-top:9px">
         <span style="color:#43BE64; font-weight:bold">My</span>Logbook</h2>
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
       <button type="button" class="navbarButton1 greenGradient" id ="sign-out-button">Sign Out</button>
       <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:16px"><b><?php echo $user->getUsername();?></b></h3>
       <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png" onclick="togglePopUp(true, 'profileSettings')">
+<?php }else{?>
+<h2 style="float:left; margin-top:9px">
+        <span style="color:#43BE64; font-weight:bold">My</span>Logbook</h2>
+      <input class="searchBar" placeholder="Search MyLogbook" size="40">
+      <button type="button" class="navbarButton1 greenGradient" id ="sign-out-button">Sign Out</button>
+      <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:16px"><b><?php echo $user->getUsername();?></b></h3>
+      <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png" onclick="togglePopUp(true, 'profileSettings')">
+
+<?php }?>
 
     </div>
   </div>
@@ -55,21 +57,34 @@ session_start();
       <div class="logbookSelectionPane" id="logbookSelectionPane"
         style="float:left; height:100%">
 
-        <div class="logbookContainer">
-          <button type="button" class="logbookButton"
-            id="createLogbookButton" onclick="togglePopUp(true, 'settings');
-            createNewLogbook = true;">New Logbook...
-          </button>
-        </div>
-
 <?php
 	// displaying logbooks
 	$db = DB::getInstance();
-	$userID = $user->getID();
-	foreach ($db->query("SELECT * FROM `accesses` WHERE `user_id` = $userID") as $row) {
-    $logbook = new Logbook($row['logbook_id']);
-		echo "<script>createLogbook('".$logbook->name."', ".$logbook->id.")</script>";
+  if(isset($_GET['user'])){
+  	$userID = $_GET['user'];
+    if(User::userExists($userID)){
+  	  foreach ($db->query("SELECT * FROM `logbooks` WHERE `user_id` = $userID AND `privacy` = 0") as $row) {
+  		  echo "<script>createLogbook('".$row['name']."', ".$row['id'].")</script>";
+      }
+    }
+    else{
+      echo "<script>$.notify('Something wrong with the user...', 'warn');</script>";
+    }
   }
+  if(isset($_GET['logbook'])){
+    $logbookID = $_GET['logbook'];
+    if(Logbook::logbookExists($logbookID)){
+      $logbook = new Logbook($logbookID);
+      if($logbook->isPublic()){
+        echo "<script>createLogbook('".$logbook->name."', ".$logbookID."); jQuery(document).ready(function(){jQuery('.logbookButton').click()})</script>";
+      }else{
+        echo "<script>$.notify('Something wrong with the logbook...', 'warn');</script>";
+      }
+    }else{
+      echo "<script>$.notify('Something wrong with this logbook...', 'warn'); console.log('".$logbookID."');</script>";
+    }
+  }
+
 
 ?>
 
@@ -79,9 +94,7 @@ session_start();
 
         <div id="logbookEditorSpace" style="min-height:calc(100% - 85px)"></div>
 
-        <button type="button" class="logbookButton"
-          id="createLogbookEntryButton" onClick="createLogbookEntry()">
-          New Logbook Entry...</button>
+       
 
       </div>
 
@@ -188,22 +201,19 @@ session_start();
 
     <div style="width:500px; font-size:16px">
 
-      <form id="profileSettingsForm">
+      <form>
 
         <div>
-          <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
-          <img id='profilePicturePreview' style="margin-bottom:18px; vertical-align:top;
+          <label for="profilePicture" style="width:100px"><b>Picture</b></label>
+          <img id='profilePicture' style="margin-bottom:18px; vertical-align:top;
             position:relative; left:calc(50% - 165px); height:120px; width:120px"
             src="assets/logbook-page/profile-pic.png">
         </div>
 
         <div style="height:52px">
-          <input type="file" id="upload-profile-pic" name="upload" style=
-	          "visibility:hidden; width:1px; height:1px">
           <button type="button" class="greyGradient" style="margin:0 0 18px 0;
-            padding:0; position:relative; left:calc(50% - 65px); width:120px"
-            onclick="document.getElementById('upload-profile-pic').click();
-            return false" id="profile-pic-button">Change profile picture</button>
+            padding:0; position:relative; left:calc(50% - 60px); width:120px"
+            id="profile-pic-button">Change profile picture</button>
         </div>
 
         <div>
@@ -232,6 +242,49 @@ session_start();
         onclick="togglePopUp(false, 'profileSettings')">Cancel</button>
       <button class="navbarButton1 greenGradient", style="float:right; margin:0"
         onclick="togglePopUp(false, 'profileSettings')">Save</button>
+
+    </div>
+
+  </div>
+
+ //signin
+  <div class="popUp", id="signIn">
+
+    <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
+
+      <h2 style="float:left">Sign in</h2>
+      <button class="closeButton" type="button" style="background-color: #E2E2E2"
+        onClick="togglePopUp(false, 'signIn')">
+      </button>
+
+    </div>
+
+    <div style="height:88px; width:480px; font-size:16px">
+
+      <form>
+
+        <div class="form">
+          <label for="username" style="width:100px"><b>Username</b></label>
+          <input style="height:28px; padding-left:8px; margin-left:10px;
+            font-size:16px" id="sign-in-username" size=30>
+        </div>
+
+        <div class="form">
+          <label for="password" style="width:100px"><b>Password</b></label>
+          <input type="password" style="height:28px; padding-left:8px; margin-left:10px;
+            font-size:16px" id="sign-in-password" size=30>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
+
+      <button class="navbarButton1 redGradient" style="float:left; margin:0"
+        onclick="togglePopUp(false, 'signIn')">Cancel</button>
+      <button class="navbarButton1 greenGradient", id = "sign-in-button" style="float:right; margin:0"
+        >Sign in</button>
 
     </div>
 

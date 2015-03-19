@@ -21,7 +21,9 @@
 	        $stmt->bindParam(3, $userID);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
 	        $stmt->execute();
-	        return $db->lastInsertID();
+	        $lastInsert = $db->lastInsertID();
+	        $this->share($userID);
+	        return $lastInsert;
 		}
 
 		public function addContent($content){
@@ -35,13 +37,15 @@
 	        $stmt->bindParam(4, $userID);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
 	        $stmt->execute();
-	        return $db->lastInsertID();
+	        $lastInsert = $db->lastInsertID();
+	        return $lastInsert;
 		}
 
 		public function getAllEntries(){
 			$db = DB::getInstance();
 			$logbookID = $this->getID();
 			return $db->query("SELECT * FROM `logs` WHERE `logbook_id` = $logbookID");
+
 		}
 
 		public function hasAccess($userID){
@@ -78,6 +82,24 @@
 
 		public function getID(){
 			return $this->id;
+		}
+
+		public function isPublic(){
+			if($this->privacy == 0)
+				return true;
+			return false;
+		}
+
+		public static function logbookExists($logbookID){
+			$db = DB::getInstance();
+			$stmt = $db->prepare("SELECT * FROM `logbooks` WHERE `id` = ?");
+			$stmt->bindParam(1, $logbookID);
+			$stmt->execute();
+	        $result = $stmt->fetchAll();
+	        foreach($result as $row){
+	        	return true;
+	        }
+	        return false;
 		}
 
 
