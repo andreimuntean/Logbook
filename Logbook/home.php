@@ -1,9 +1,9 @@
 <?php
-include 'inc/db.inc.php';
-include 'inc/user.inc.php';
-include 'inc/logbook.inc.php';
-session_start();
+  include 'inc/db.inc.php';
+  include 'inc/user.inc.php';
+  include 'inc/logbook.inc.php';
 
+  session_start();
   if(!isset($_SESSION['user'])){
     header("Location: index.php");
     die();

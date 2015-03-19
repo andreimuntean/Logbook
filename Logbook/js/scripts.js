@@ -361,8 +361,8 @@ var partial = function (func /*, 0..n args */) {
 
 
 $(document).ready(function(){
-  $(".logbookEditor").niceScroll({ autohidemode: true })
-  $(".logbookSelectionPane").niceScroll({ autohidemode: true })
+  //$(".logbookEditor").niceScroll({ autohidemode: true })
+  //$(".logbookSelectionPane").niceScroll({ autohidemode: true })
   //global varibale currentLogbookID
   window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){

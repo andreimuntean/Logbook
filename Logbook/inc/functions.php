@@ -1,25 +1,25 @@
 <?php
-include 'logbook.inc.php';
-include 'db.inc.php';
-include 'user.inc.php';
+include_once 'logbook.inc.php';
+include_once 'db.inc.php';
+include_once 'user.inc.php';
 
 /**
  * Performs user authentication
  *
  * @param String    $username username of the user
- * @param String 	$password    password of the user 
+ * @param String 	$password    password of the user
  * @throws PDOException 	invalid input or database disconnection
- * @return Integer 	
+ * @return Integer
  */
 
     function login($username, $password){
-	    try{    
+	    try{
 	    	$password = sha1($password);
 			$db = DB::getInstance();
 	        $stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
 	        $stmt->bindParam(1, $username);
 	        $stmt->bindParam(2, $password);
-	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);   
+	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 	        $stmt->execute();
         }
 	    catch(PDOException $e) {
@@ -37,7 +37,7 @@ include 'user.inc.php';
  *
  * @param String    $email email of the user
  * @param String    $username username of the user
- * @param String 	$password Sha1 encrypted password of the user 
+ * @param String 	$password Sha1 encrypted password of the user
  * @throws PDOException 	invalid input or database disconnection
  * @return Integer 	0 if the user is succesfully registered, -1 if exception is caught
  */
