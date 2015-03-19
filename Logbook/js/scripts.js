@@ -3,6 +3,39 @@
 //$.getScript("tinymce/js/tinymce/tinymce.min.js");
 
 
+function searchLogbooks(token){
+    $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "token":token,
+                "action":"search"
+            }
+    }).done(function(response){
+      console.log(response);
+      //response - is the json format you need
+      // the url format should be logbook.php?logbook=21
+    })
+}
+
+function searchUsers(token){
+    $.ajax({
+            url:"inc/functions.php",
+            type:"post",
+            data:{
+                "token":token,
+                "action":"search"
+            }
+    }).done(function(response){
+      console.log(response);
+      //response - is the json format you need
+      // the url format should be logbook.php?user=21
+    })
+}
+
+
+
+
 function addLogbookToDB(logbookName, logbookPrivacy){
     $.ajax({
             url:"inc/logbook.php",
@@ -328,7 +361,8 @@ var partial = function (func /*, 0..n args */) {
 
 
 $(document).ready(function(){
-
+  $(".logbookEditor").niceScroll({ autohidemode: true })
+  $(".logbookSelectionPane").niceScroll({ autohidemode: true })
   //global varibale currentLogbookID
   window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){

@@ -64,5 +64,8 @@ session_start();
 			}
 		}
 	}
+	elseif($action == "search"){
+		echo Logbook::search($_POST['token']);
+	}
 ?>
 

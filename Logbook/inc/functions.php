@@ -1,4 +1,7 @@
 <?php
+include 'logbook.inc.php';
+include 'db.inc.php';
+include 'user.inc.php';
 
 /**
  * Performs user authentication
@@ -100,5 +103,10 @@
     		return false;
     	return true;
     }
+
+	$action = isset($_POST['action'])?$_POST['action']:"";
+	if($action == "search"){
+		echo User::search($_POST['token']);
+	}
 
 ?>

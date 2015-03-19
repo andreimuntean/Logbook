@@ -25,6 +25,7 @@ session_start();
   <script src="js/notify.min.js"></script>
   <script language="JavaScript" src="js/scripts.js"></script>
   <script type="text/javascript" src="tinymce/js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="js/nicescroll.min.js"></script>
   <script type="text/javascript">
   tinyMCE.init({
     mode: "none",

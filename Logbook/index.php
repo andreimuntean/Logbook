@@ -38,7 +38,7 @@
     <div class="contentContainer">
 
       <div class="bigThing" style="width:600px; float:left">
-        <h1 style="color:#EEF3F8">The future of Logbooks is here.</h1>
+        <h1 style="color:#EEF3F8">An innovative approach to logbooks.</h1>
         <p>Instantly accessible by computer or mobile device, MyLogbook is an
            indispensible tool for the modern programmer to plan their projects
            before realising them. Start now by signing up.</p>

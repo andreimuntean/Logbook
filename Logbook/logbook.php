@@ -71,7 +71,7 @@ if(isset($_SESSION['user']))
       echo "<script>$.notify('Something wrong with the user...', 'warn');</script>";
     }
   }
-  if(isset($_GET['logbook'])){
+  elseif(isset($_GET['logbook'])){
     $logbookID = $_GET['logbook'];
     if(Logbook::logbookExists($logbookID)){
       $logbook = new Logbook($logbookID);
@@ -83,6 +83,10 @@ if(isset($_SESSION['user']))
     }else{
       echo "<script>$.notify('Something wrong with this logbook...', 'warn'); console.log('".$logbookID."');</script>";
     }
+  }
+  else{
+    header("Location: index.php");
+    die();
   }
 
 

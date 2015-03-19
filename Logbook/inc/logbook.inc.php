@@ -102,6 +102,16 @@
 	        return false;
 		}
 
+		public static function search($token){
+			$token = "%".$token."%";
+			$db = DB::getInstance();
+			$stmt = $db->prepare("SELECT id FROM `logbooks` WHERE `name` like ?");
+			$stmt->bindParam(1, $token);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return json_encode($result);
+		}
+
 
 	}
 ?>
