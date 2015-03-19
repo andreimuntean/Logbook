@@ -339,10 +339,32 @@ div.headerBar {
   background-color: #393F48;
 }
 
-div.searchResults {
-  
+div.genericContainer {
+  margin-top: 40px;
+  min-height: 500px;
+}
+
+ul.searchResults {
+  list-style-type: none;
 }
 
 a.searchResult {
+  font-size: 16px;
+}
 
+div.textContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div.textRegion {
+  font-size: 16px;
+}
+
+ul {
+  color: #9B9EA2;
+}
+
+ul.termsOfService {
+  list-style-type: decimal;
 }
