@@ -332,3 +332,17 @@ textarea.entryTextArea {
   width: 640px;
   min-height: 80px;
 }
+
+div.headerBar {
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #393F48;
+}
+
+div.searchResults {
+  
+}
+
+a.searchResult {
+
+}
