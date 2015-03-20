@@ -66,7 +66,7 @@
     </div>
 
     <div class="contentContainer-90">
-      <div class="bigThing" style="height:800px">
+      <div class="bigThing" style="height:600px">
 
         <div class="advert" style="float:left">
           <img src="assets/landing-page/Interconnectivity_Graphic.png"
@@ -105,13 +105,60 @@
       </div>
     </div>
 
-    <div class="bigThing" style="height:800px">
-      <h2>Still unsure what should go here</h2>
-      <p>Perhaps we could put several website reviews from ourselves in this
-         area, like <a href="https://eleks.github.io/js2js/">this</a></p>
-      <p>Another idea is to take a pic of ourselves (Silicon Valley Tv show
-        <a href="https://d1oi7t5trwfj5d.cloudfront.net/ef/cd/b83bb1864a1d9b9c3c0e45551720/silicon-valley-poster.jpg">style</a>) and just slap it there or something? I don't know
-        what the hell I am rambling about.</p>
+    <div class="bigThing" style="height:900px">
+      <h2 style="margin-bottom:60px">Testimonials</h2>
+      <div class="testimonial">
+        <div style="float:left">
+          <img src="assets/Testimonials/Andrei_Testimonial.png" class="testimonial">
+        </div>
+        <div style="float:left; width:761px; margin-top:11px">
+          <p><em>MyLogbook is so incredibly useful. I no longer need to worry
+            about accidently leaving my logbook at home and being unable to get
+            it marked as I can now access it from any computer.</em><p>
+          <p>- Andrei Muntean, First Year Student</p>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div style="float:left">
+          <img src="assets/Testimonials/Hikmet_Testimonial.png" class="testimonial">
+        </div>
+        <div style="float:left; width:761px; margin-top:11px">
+          <p><em>MyLogbook is totally rad yo. Me and me peeps can share a logbook
+            between us, so we can see what everyone be doin. Dunno what I'd do
+            without it man...</em><p>
+          <p>- Hikmet Haciyev, First Year Student</p>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div style="float:left">
+          <img src="assets/Testimonials/Pranav_Testimonial.png" class="testimonial">
+        </div>
+        <div style="float:left; width:761px; margin-top:11px">
+          <p><em>I can definitely say that having a proper user interface to
+            write down my logs as well as a proper folder system for several
+            logbooks makes my work far easier. It makes it far easier to show my
+            work to teaching assistants marking it.</em><p>
+          <p>- Pranav Bahuguna, First Year Student</p>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div style="float:left">
+          <img src="assets/Testimonials/Seb_Testimonial.png" class="testimonial">
+        </div>
+        <div style="float:left; width:761px; margin-top:11px">
+          <p><em>MyLogbook is the best! It is far more versatile, especially since
+            I can search for other logbooks and users to see how they approached
+            a problem. It is also far more secure as there is no way of someone
+            else copying off your work if you make your logbooks private! 10/10
+            would definitely recommend.</em><p>
+          <p>- Sebastian Costin, First Year Student</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Meet the Z5 team</h2>
+    <div class="bigThing" style="height:600px">
+      <img style="width:720px; height:540px" src="assets/landing-page/Z5Team2.png">
     </div>
 
     <p class="verySmall" style="margin-bottom:8px;">&copy;
