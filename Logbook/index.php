@@ -123,9 +123,9 @@
           <img src="assets/Testimonials/Hikmet_Testimonial.png" class="testimonial">
         </div>
         <div style="float:left; width:761px; margin-top:11px">
-          <p><em>MyLogbook is totally rad yo. Me and me peeps can share a logbook
-            between us, so we can see what everyone be doin. Dunno what I'd do
-            without it man...</em><p>
+          <p><em>What I love about MyLogbook is that I can share a logbook with
+            other members of my group. That way, we can view each others notes
+            and collaborate far more effectively on group projects.</em><p>
           <p>- Hikmet Haciyev, First Year Student</p>
         </div>
       </div>

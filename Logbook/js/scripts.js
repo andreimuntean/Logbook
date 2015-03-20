@@ -158,7 +158,7 @@ function createLogbookEntry ()
 
   // Adds the inner divs inside of the new container div.
   entryHeader.setAttribute ("class", "entryHeader");
-  entryHeader.innerHTML = "More test text";
+  //entryHeader.innerHTML = "More test text";
 
   entryContent.setAttribute ("class", "entryContent");
   document.getElementById(entryID).appendChild (entryHeader);
@@ -261,7 +261,7 @@ function generatePulledLog(textToSave)
 
   // Adds the inner divs inside of the new container div.
   entryHeader.setAttribute ("class", "entryHeader");
-  entryHeader.innerHTML = "More test text";
+  //entryHeader.innerHTML = "More test text";
 
   entryContent.setAttribute ("class", "entryContent");
   document.getElementById(entryID).appendChild (entryHeader);
@@ -294,7 +294,7 @@ function togglePopUp (isOn, id)
 
   document.getElementById(id).style.display = display;
   document.getElementById("blanket").style.display = display;
-  
+
 }
 
 // Saves the desired settings for a logbook.

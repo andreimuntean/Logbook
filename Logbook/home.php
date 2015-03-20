@@ -144,35 +144,11 @@
 
     </div>
 
-    <div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
+    <!--<div style="height:40px; line-height:40px; padding-top:10px; padding-bottom:10px">
 
       <h3 style="float:left">General info</h3>
 
-    </div>
-
-    <div style="font-size:16px">
-
-      <div>
-        <label for="createdOn" style="width:120px"><b>Created on</b></label>
-        <p id='createdOn' style="margin-left:10px"></p>
-      </div>
-
-      <div>
-        <label for="lastUpdated" style="width:120px"><b>Last updated</b></label>
-        <p id='lastUpdated' style="margin-left:10px"></p>
-      </div>
-
-      <div>
-        <label for="entryNum" style="width:120px"><b>Entries</b></label>
-        <p id='entryNum' style="margin-left:10px"></p>
-      </div>
-
-      <div>
-        <label for="logbookUsers" style="width:120px"><b>Users</b></label>
-        <p id='logbookUsers' style="margin-left:10px"></p>
-      </div>
-
-    </div>
+    </div>-->
 
     <div style="height:34px; width:500px; padding-top:8px; padding-bottom:10px; position:relative; bottom:0px">
 
@@ -205,10 +181,10 @@
           <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
           <img id='profilePicturePreview' style="margin-bottom:18px; vertical-align:top;
             position:relative; left:calc(50% - 165px); height:120px; width:120px"
-            src=" 
+            src="
     <?php
       	if($user->getProfilePic()==""){
-      
+
       echo "assets/logbook-page/profile-pic.png";
 
 	}else{
@@ -229,7 +205,7 @@
 
         <div>
           <label for="profileName" style="width:100px"><b>Username</b></label>
-          <input id='profileName' disabled value="<?php echo $user->getUsername();?>" style="height:28px; padding-left:8px; 
+          <input id='profileName' disabled value="<?php echo $user->getUsername();?>" style="height:28px; padding-left:8px;
             margin-left:10px; font-size:16px" size=30>
         </div>
 
