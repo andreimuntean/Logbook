@@ -473,7 +473,7 @@ $(document).ready(function(){
         cache: false,
         contentType: false,
         processData: false,
-        success: function(res) { alert("Upload successful " + res); }
+        success: function(res) { $.notify("Profile picture successfuly changed", 'success'); console.log(res);}
       });
     }
   });

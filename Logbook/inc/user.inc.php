@@ -22,6 +22,10 @@
 			return $this->id;
 		}
 
+		function getProfilePic(){
+			return $this->profile_pic;
+		}
+
 		function getIDfromUsername($username){
 			$db = DB::getInstance();
 			$stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ?");

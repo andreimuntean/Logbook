@@ -44,7 +44,18 @@
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
       <button type="button" class="navbarButton1 greenGradient" id ="sign-out-button">Sign Out</button>
       <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:16px"><b><?php echo $user->getUsername();?></b></h3>
+      <?php
+      	if($user->getProfilePic()==""){
+      ?>
       <img class="navbarProfilePic" src="assets/logbook-page/profile-pic.png" onclick="togglePopUp(true, 'profileSettings')">
+
+      <?php
+      	}else{
+      ?>
+      	<img class="navbarProfilePic" src="assets/profile-pics/<?php echo $user->getProfilePic(); ?>" onclick="togglePopUp(true, 'profileSettings')">
+      <?php
+      	}
+      ?>
 
     </div>
   </div>
@@ -194,7 +205,12 @@
           <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
           <img id='profilePicturePreview' style="margin-bottom:18px; vertical-align:top;
             position:relative; left:calc(50% - 165px); height:120px; width:120px"
-            src="assets/logbook-page/profile-pic.png">
+            src=" <?php
+      	if($user->getProfilePic()==""){
+      ?>
+      assets/logbook-page/profile-pic.png
+<?php }else{echo 'assets/profile-pics/'.$user->getProfilePic();}?>
+      ">
         </div>
 
         <div style="height:52px">
