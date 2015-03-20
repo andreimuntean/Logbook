@@ -205,11 +205,16 @@
           <label for="profilePicturePreview" style="width:100px"><b>Picture</b></label>
           <img id='profilePicturePreview' style="margin-bottom:18px; vertical-align:top;
             position:relative; left:calc(50% - 165px); height:120px; width:120px"
-            src=" <?php
+            src=" 
+    <?php
       	if($user->getProfilePic()==""){
-      ?>
-      assets/logbook-page/profile-pic.png
-<?php }else{echo 'assets/profile-pics/'.$user->getProfilePic();}?>
+      
+      echo "assets/logbook-page/profile-pic.png";
+
+	}else{
+		echo 'assets/profile-pics/'.$user->getProfilePic();
+	}
+?>
       ">
         </div>
 
@@ -224,19 +229,19 @@
 
         <div>
           <label for="profileName" style="width:100px"><b>Username</b></label>
-          <input id='profileName' style="height:28px; padding-left:8px;
+          <input id='profileName' disabled value="<?php echo $user->getUsername();?>" style="height:28px; padding-left:8px; 
             margin-left:10px; font-size:16px" size=30>
         </div>
 
         <div>
           <label for="profileEmail" style="width:100px"><b>Email</b></label>
-          <input id='profileEmail' style="height:28px; padding-left:8px;
+          <input id='profileEmail' disabled value="<?php echo $user->getEmail();?>" style="height:28px; padding-left:8px;
             margin-left:10px; font-size:16px" size=30>
         </div>
 
         <div>
           <label for="profilePassword" style="width:100px"><b>Password</b></label>
-          <input id='profilePassword' style="height:28px; padding-left:8px;
+          <input type='password' id='profilePassword' style="height:28px; padding-left:8px;
             margin-left:10px; font-size:16px" size=30>
         </div>
 
@@ -246,7 +251,7 @@
 
       <button class="navbarButton1 redGradient" style="float:left; margin:0"
         onclick="togglePopUp(false, 'profileSettings')">Cancel</button>
-      <button class="navbarButton1 greenGradient", style="float:right; margin:0"
+      <button id ="saveButton" class="navbarButton1 greenGradient", style="float:right; margin:0"
         onclick="togglePopUp(false, 'profileSettings')">Save</button>
 
     </div>

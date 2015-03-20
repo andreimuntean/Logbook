@@ -84,6 +84,8 @@ function saveEntryToDB(currentLogbookID, content){
     })
 }
 
+
+
 // Creates a logbook and settings button in the left selection pane.
 function createLogbook (logbookName, logbookID)
 {
@@ -272,6 +274,8 @@ function togglePopUp (isOn, id)
 
   document.getElementById(id).style.display = display;
   document.getElementById("blanket").style.display = display;
+  
+    $.delay(3000);
 }
 
 // Saves the desired settings for a logbook.
@@ -338,7 +342,29 @@ var partial = function (func /*, 0..n args */) {
 $(document).ready(function(){
   //$(".logbookEditor").niceScroll({ autohidemode: true })
   //$(".logbookSelectionPane").niceScroll({ autohidemode: true })
-  //global varibale currentLogbookID
+  //global variable currentLogbookID
+
+function savePassword(){
+  var password = $("#profilePassword").val();
+  if (password == "")
+    return false;
+   $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "password":password,
+                "action":"password"
+            }
+    }).done(function(response){
+      $("#profilePassword").val("");
+      $.notify("Password successfully changed", "success");
+    })
+
+}
+$("#saveButton").click(function(e){
+  e.preventDefault();
+  savePassword();
+})
   window.currentLogbookID = 0;
 	$("#signUpButton").click(function(){
 		var username = $("input[name='username']").val();
@@ -473,7 +499,7 @@ $(document).ready(function(){
         cache: false,
         contentType: false,
         processData: false,
-        success: function(res) { $.notify("Profile picture successfuly changed", 'success'); console.log(res);}
+        success: function(res) { $.notify("Profile picture successfuly changed", 'success'); setTimeout(function(){location.href="home.php"}, 500);}
       });
     }
   });

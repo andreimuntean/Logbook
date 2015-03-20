@@ -26,6 +26,19 @@
 			return $this->profile_pic;
 		}
 
+		function getEmail(){
+			return $this->email;
+		}
+
+		function setPassword($password){
+			$password = sha1($password);
+			$db = DB::getInstance();
+			$stmt = $db->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
+			$stmt->bindParam(1, $password);
+			$stmt->bindParam(2, $this->getID());
+			$stmt->execute();
+		}
+
 		function getIDfromUsername($username){
 			$db = DB::getInstance();
 			$stmt = $db->prepare("SELECT * FROM `users` WHERE `username` = ?");

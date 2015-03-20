@@ -67,5 +67,8 @@ session_start();
 	elseif($action == "search"){
 		echo Logbook::search($_POST['token']);
 	}
+	elseif($action == "password"){
+		$user->setPassword($_POST['password']);
+	}
 ?>
 
