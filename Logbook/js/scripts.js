@@ -68,13 +68,17 @@ function deleteLogbookfromDB(logbookID){
 }
 
 function saveEntryToDB(currentLogbookID, content){
-   console.log("content: "+content);
-   $.ajax({
+var entryID = 0;
+if($("#currentTextArea").attr("edited") == "true"){
+ entryID = $("#currentTextArea").attr("data-id");
+}
+    $.ajax({
             url:"inc/logbook.php",
             type:"post",
             data:{
                 "id":currentLogbookID,
                 "content": content,
+                "editOF" : entryID,
                 "action":"newEntry"
             }
     }).done(function(response){
@@ -181,6 +185,8 @@ function saveEntry ()
   tinymce.triggerSave();
   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());
   tinymce.remove();
+
+   $("#currentTextArea").removeAttr("edited");
   $("#currentTextArea").hide();
   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
 
@@ -188,12 +194,13 @@ function saveEntry ()
   //document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
 
   // Add the date an time tag.
-  textToSave = "<span style=\"color: #FFFFFF\">[" + date + "]</span>" + "<br>" + textToSave;
+  //textToSave = "<span style=\"color: #FFFFFF\">[" + date + "]</span>" + "<br>" + textToSave;
 }
 
 function editEntry (buttonId)
 {
-  document.getElementById("createLogbookEntryButton").disabled = true;
+  console.log(buttonId);
+  //document.getElementById("createLogbookEntryButton").disabled = true;
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -204,8 +211,9 @@ function editEntry (buttonId)
   var entryTextArea = document.createElement ("textarea");
   var saveEntry     = document.createElement ("span");
   var editEntry     = document.getElementById(buttonId);
-
+  var databaseID    = buttonId.substring(5, buttonId.length - 1)
   entryTextArea.setAttribute ("class", "entryTextArea");
+  entryTextArea.setAttribute ("data-id", databaseID);
   entryTextArea.id = "currentTextArea";
   saveEntry.setAttribute ("class", "saveButton");
   saveEntry.id = "currentSaveButton";
@@ -219,7 +227,16 @@ function editEntry (buttonId)
 
   // Adding the text area.
   var entryContentID = buttonId.substring(0, buttonId.length - 1) + "C";
-  document.getElementById(entryContentID).appendChild (entryTextArea);
+  var oldContent = $("#" + entryContentID).html();
+  $("#" + entryContentID).html("");
+   document.getElementById(entryContentID).appendChild (entryTextArea);
+   entryTextArea.innerHTML = oldContent;
+   $("#currentTextArea").attr("edited","true");
+  tinyMCE.remove();
+  tinyMCE.init({
+   mode: "textareas",
+   selector: "textarea"
+  });
 }
 
 // This function generates a log so that it can be pulled from the server.
@@ -274,7 +291,6 @@ function togglePopUp (isOn, id)
   document.getElementById(id).style.display = display;
   document.getElementById("blanket").style.display = display;
   
-    $.delay(3000);
 }
 
 // Saves the desired settings for a logbook.

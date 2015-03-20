@@ -22,19 +22,19 @@
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 	        $stmt->execute();
 	        $lastInsert = $db->lastInsertID();
-	        $this->share($userID);
 	        return $lastInsert;
 		}
 
-		public function addContent($content){
+		public function addContent($content, $editOF){
 			$db = DB::getInstance();
 			$logbookID = $this->getID();
 			$userID = $this->getUserID();
-	        $stmt = $db->prepare("INSERT INTO `logs`(`logbook_id`, `content`, `date`, `user_id`) VALUES(?, ?, ?, ?)");
+	        $stmt = $db->prepare("INSERT INTO `logs`(`logbook_id`, `content`, `date`, `user_id`, `edit_of`) VALUES(?, ?, ?, ?, ?)");
 	        $stmt->bindParam(1, $logbookID);
 	        $stmt->bindParam(2, $content);
 	        $stmt->bindParam(3, date('Y-m-d H:i:s'));
 	        $stmt->bindParam(4, $userID);
+	        $stmt->bindParam(5, $editOF);
 	        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 	        $stmt->execute();
 	        $lastInsert = $db->lastInsertID();
@@ -44,7 +44,12 @@
 		public function getAllEntries(){
 			$db = DB::getInstance();
 			$logbookID = $this->getID();
-			return $db->query("SELECT * FROM `logs` WHERE `logbook_id` = $logbookID");
+			$stmt = $db->prepare("SELECT * FROM `logs` WHERE `logbook_id` = ?");
+			$stmt->bindParam(1, $logbookID);
+		 	$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	        return $result;
+
 
 		}
 

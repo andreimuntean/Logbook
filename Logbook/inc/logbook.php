@@ -4,6 +4,26 @@
 	include 'logbook.inc.php';
 session_start();
 
+	function printRecursively($logbookEntries, $j){
+				echo '<div class="entryContainer ';
+				if($logbookEntries[$j]->edit_of != 0)
+					echo "editedEntryContainer";
+				echo '" id="entry'.$logbookEntries[$j]->id.'">
+					<div class="entryHeader" id="entry'.$logbookEntries[$j]->id.'H">
+						'.$logbookEntries[$j]->date.'
+						<span id="entry'.$logbookEntries[$j]->id.'E" onclick="editEntry(this.id)" class="editButton">
+							Edit
+						</span>
+					</div>
+					<div class="entryContent" id="entry'.$logbookEntries[$j]->id.'C">'.$logbookEntries[$j]->content.'</div>
+				</div>';
+				for ($c = 0; $c < count($logbookEntries); $c++) {
+					if($logbookEntries[$c]->edit_of == $logbookEntries[$j]->id)
+						printRecursively($logbookEntries, $c);
+				}
+			}
+
+
 	$action = isset($_POST['action'])?$_POST['action']:"";
 	$id = isset($_POST['id'])?$_POST['id']:0;
 	if(!isset($_SESSION['user'])){
@@ -32,23 +52,18 @@ session_start();
 		//checking if the user has access to the logbook
 		if($logbook->getUserID() == $user->getID()){
 			$content = isset($_POST['content'])?$_POST['content']:"";
-			echo $logbook->addContent($content);
+			$editOF = isset($_POST['editOF'])?$_POST['editOF']:"";
+			echo $logbook->addContent($content, $editOF);
 		}
 	}
 	// displaying all logbook entries
 	elseif($action == "showAllEntries"){
 		$logbook = new Logbook($id);
 		$logbookEntries = $logbook->getAllEntries();
-		foreach ($logbookEntries as $logbookEntry) {
-			echo '<div class="entryContainer" id="entry'.$logbookEntry["id"].'">
-					<div class="entryHeader" id="entry'.$logbookEntry["id"].'H">
-						'.$logbookEntry["date"].'
-						<span id="entry'.$logbookEntry["id"].'E" onclick="editEntry(this.id)" class="editButton">
-							Edit
-						</span>
-					</div>
-					<div class="entryContent" id="entry'.$logbookEntry["id"].'C">'.$logbookEntry["content"].'</div>
-				</div>';
+		//print_r($logbookEntries);
+		for ($i = 0; $i < count($logbookEntries); $i++) {
+			
+			printRecursively($logbookEntries, $i);			
 		}
 	}
 	elseif($action == "share"){
