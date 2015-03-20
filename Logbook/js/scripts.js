@@ -117,7 +117,6 @@ function createLogbook (logbookName, logbookID)
 
   // Sets the logbook focus to this logbook and enables the create entry button.
   changeLogbookFocus (logbookID);
-  document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
 
   // logbookIDCounter is incremented (guarantees each entry id is unique).
   logbookIDCounter++;
@@ -126,9 +125,9 @@ function createLogbook (logbookName, logbookID)
 // Creates a logbook entry in the right editor pane.
 function createLogbookEntry ()
 {
-  if($("#currentTextArea").length)
+  if($("#currentTextArea").length || window.currentLogbookID == 0)
     return false;
-  document.getElementById("createLogbookEntryButton").setAttribute("disabled", "disabled");
+ // document.getElementById("createLogbookEntryButton").setAttribute("disabled", "disabled");
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
   {
@@ -186,7 +185,7 @@ function saveEntry ()
   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
 
   // Re-enable the create log button.
-  document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
+  //document.getElementById("createLogbookEntryButton").removeAttribute ("disabled");
 
   // Add the date an time tag.
   textToSave = "<span style=\"color: #FFFFFF\">[" + date + "]</span>" + "<br>" + textToSave;
