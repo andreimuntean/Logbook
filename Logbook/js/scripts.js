@@ -7,35 +7,6 @@ var createNewLogbook = false; // Decides whether or not to create a new logbook 
 var currentLogbookID = 0;
 var logbookFocus = -1;         // Contains the id of the logbook the user has selected currently.
 
-function searchLogbooks(token){
-    $.ajax({
-            url:"inc/logbook.php",
-            type:"post",
-            data:{
-                "token":token,
-                "action":"search"
-            }
-    }).done(function(response){
-      console.log(response);
-      //response - is the json format you need
-      // the url format should be logbook.php?logbook=21
-    })
-}
-
-function searchUsers(token){
-    $.ajax({
-            url:"inc/functions.php",
-            type:"post",
-            data:{
-                "token":token,
-                "action":"search"
-            }
-    }).done(function(response){
-      console.log(response);
-      //response - is the json format you need
-      // the url format should be logbook.php?user=21
-    })
-}
 
 function addLogbookToDB(logbookName, logbookPrivacy){
     $.ajax({
@@ -528,3 +499,85 @@ $("#saveButton").click(function(e){
     }
   });
 })
+
+var SearchResult = function(title, url) {
+    this.title = title;
+    this.url = url;
+};
+
+// Adds a search result.
+function addView(searchResult) {
+    var searchResultView = document.createElement("li");
+    var searchResultLink = document.createElement("a");
+
+    // Assigns the searchResult class to the searchResultLink element.
+    searchResultLink.className = "searchResult";
+
+    // Customizes the searchResultLink element.
+    searchResultLink.href = searchResult.url;
+    searchResultLink.innerHTML = searchResult.title;
+
+    // Adds the search result.
+    searchResultView.appendChild(searchResultLink);
+    document.getElementsByClassName("searchResults")[0].appendChild(searchResultView);
+}
+
+// Creates a view for each search result and displays it.
+function displayResults(searchResults) {
+    searchResults.forEach(function(searchResult) {
+        addView(searchResult);
+    });
+}
+
+$(document).ready(function(){
+$('.searchBar').bind("enterKey",function(e){
+  $("#logbookEditorSpace").html('<div id = "something"><h4>Users</h4><ul class="searchResults"></ul></div>');
+  var token = $('.searchBar').val();
+   searchUsers(token);
+  
+   
+});
+$('.searchBar').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
+    }
+});
+})
+
+function searchLogbooks(token){
+    $.ajax({
+            url:"inc/logbook.php",
+            type:"post",
+            data:{
+                "token":token,
+                "action":"search"
+            }
+    }).done(function(response){
+      console.log(response);
+      response = $.parseJSON(response);
+      jQuery.each(response, function(i, val){
+        addView(new SearchResult(val,"logbook.php?logbook="+i));
+      })
+    })
+}
+
+function searchUsers(token){
+    $.ajax({
+            url:"inc/functions.php",
+            type:"post",
+            data:{
+                "token":token,
+                "action":"search"
+            }
+    }).done(function(response){
+      console.log(response);
+      response = $.parseJSON(response);
+      jQuery.each(response, function(i, val){
+        addView(new SearchResult(val,"logbook.php?user="+i));
+      })
+       $("ul.searchResults").removeClass("searchResults");
+       $("#something").append('<h4>Logbooks</h4><ul class="searchResults"></ul>');
+        searchLogbooks(token);
+    })
+}

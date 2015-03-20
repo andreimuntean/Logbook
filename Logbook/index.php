@@ -26,7 +26,7 @@
   <div class="contentContainer">
     <div class="header">
       <h2 style="float:left; margin-top:9px">
-        <span style="color:#43BE64; font-weight:bold">My</span>Logbook
+       <a href='index.php'> <span style="font-weight:bold">My</span><span style="color:#9B9EA2 !important;">Logbook</span></a></h2>
       </h2>
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
       <button type="button" class="navbarButton1 greyGradient"

@@ -66,11 +66,15 @@
 		public static function search($token){
 			$token = "%".$token."%";
 			$db = DB::getInstance();
-			$stmt = $db->prepare("SELECT id FROM `users` WHERE `username` like ?");
+			$stmt = $db->prepare("SELECT * FROM `users` WHERE `username` like ?");
 			$stmt->bindParam(1, $token);
 			$stmt->execute();
+			$res = array();
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			return json_encode($result);
+			foreach ($result as $row) {
+				$res[$row['id']]=$row['username'];
+			}
+			return json_encode($res);
 		}
 	}
 ?>

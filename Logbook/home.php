@@ -40,7 +40,7 @@
     <div class="header">
 
       <h2 style="float:left; margin-top:9px">
-        <span style="color:#43BE64; font-weight:bold">My</span>Logbook</h2>
+       <a href='home.php'> <span style="font-weight:bold">My</span><span style="color:#9B9EA2 !important;">Logbook</span></a></h2>
       <input class="searchBar" placeholder="Search MyLogbook" size="40">
       <button type="button" class="navbarButton1 greenGradient" id ="sign-out-button">Sign Out</button>
       <h3 style="float:right; margin-right:10px; margin-top:20px; color:#EEF3F8; font-size:16px"><b><?php echo $user->getUsername();?></b></h3>
