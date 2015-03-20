@@ -115,7 +115,7 @@
           <p><em>MyLogbook is so incredibly useful. I no longer need to worry
             about accidently leaving my logbook at home and being unable to get
             it marked as I can now access it from any computer.</em><p>
-          <p>- Andrei Muntean, First Year Student</p>
+          <p style="color:#FFFFFF">- Andrei Muntean, First Year Student</p>
         </div>
       </div>
       <div class="testimonial">
@@ -126,7 +126,7 @@
           <p><em>What I love about MyLogbook is that I can share a logbook with
             other members of my group. That way, we can view each others notes
             and collaborate far more effectively on group projects.</em><p>
-          <p>- Hikmet Haciyev, First Year Student</p>
+          <p style="color:#FFFFFF">- Hikmet Haciyev, First Year Student</p>
         </div>
       </div>
       <div class="testimonial">
@@ -138,7 +138,7 @@
             write down my logs as well as a proper folder system for several
             logbooks makes my work far easier. It makes it far easier to show my
             work to teaching assistants marking it.</em><p>
-          <p>- Pranav Bahuguna, First Year Student</p>
+          <p style="color:#FFFFFF">- Pranav Bahuguna, First Year Student</p>
         </div>
       </div>
       <div class="testimonial">
@@ -151,7 +151,7 @@
             a problem. It is also far more secure as there is no way of someone
             else copying off your work if you make your logbooks private! 10/10
             would definitely recommend.</em><p>
-          <p>- Sebastian Costin, First Year Student</p>
+          <p style="color:#FFFFFF">- Sebastian Costin, First Year Student</p>
         </div>
       </div>
     </div>

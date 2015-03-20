@@ -177,7 +177,9 @@ function createLogbookEntry ()
   tinyMCE.remove();
   tinyMCE.init({
    mode: "textareas",
-   selector: "textarea"
+   selector: "textarea",
+   plugins: "charmap table",
+   theme_advanced_buttons3_add : "tablecontrols"
   });
   saveEntry.innerHTML = "Save";
   // idCounter is incremented (guarantees each entry id is unique).
@@ -239,7 +241,9 @@ function editEntry (buttonId)
   tinyMCE.remove();
   tinyMCE.init({
    mode: "textareas",
-   selector: "textarea"
+   selector: "textarea",
+   plugins: "charmap table",
+   theme_advanced_buttons3_add : "tablecontrols"
   });
 }
 

@@ -364,8 +364,7 @@ div.textRegion {
 }
 
 div.testimonial {
-  background-color: #010101;
-  opacity: 0.5;
+  background-color: rgba(1, 1, 1, 0.5);
   margin-bottom: 30px;
   width: 900px;
   height: 150px;
@@ -384,7 +383,6 @@ div.testimonial p {
   text-align: left;
   margin-left: 16px;
   margin-right: 16px;
-  color: #FFFFFF;
 }
 
 ul {
