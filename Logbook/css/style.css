@@ -318,6 +318,7 @@ span.saveButton {
   text-decoration: none;
   color:#43BE64;
   font-size: 13px;
+  cursor:pointer;
 }
 
 span.editButton {
@@ -325,6 +326,7 @@ span.editButton {
   text-decoration: none;
   color:#43BE64;
   font-size: 13px;
+  cursor: pointer;
 }
 
 textarea.entryTextArea {

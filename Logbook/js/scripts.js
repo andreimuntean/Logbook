@@ -129,8 +129,12 @@ function createLogbook (logbookName, logbookID)
 // Creates a logbook entry in the right editor pane.
 function createLogbookEntry ()
 {
-  if($("#currentTextArea").length || window.currentLogbookID == 0)
+  if($("#currentTextArea").length )
     return false;
+  if(window.currentLogbookID == 0){
+    $.notify("Choose a logbook first", "warn");
+    return false;
+  }
  // document.getElementById("createLogbookEntryButton").setAttribute("disabled", "disabled");
   var editArray = document.getElementsByClassName("editButton");
   for (var editInstance = 0; editInstance < editArray.length; editInstance++)
@@ -186,7 +190,7 @@ function saveEntry ()
   saveEntryToDB(window.currentLogbookID, $("#currentTextArea").val());
   tinymce.remove();
 
-   $("#currentTextArea").removeAttr("edited");
+  $("#currentTextArea").removeAttr("edited");
   $("#currentTextArea").hide();
   $(".logbookContainer#" + window.currentLogbookID).children(".logbookButton").click();
 
@@ -305,6 +309,7 @@ function saveLogbookSettings ()
     $("#logbookName").val("");
     privacy = $("#visibility").val();
     addLogbookToDB(name, privacy);
+    location.href = "home.php";
   }
 }
 

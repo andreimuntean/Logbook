@@ -4,7 +4,7 @@
 	include 'logbook.inc.php';
 session_start();
 
-	function printRecursively($logbookEntries, $j){
+	function printRecursively($logbookEntries, $j, $len){
 				echo '<div class="entryContainer ';
 				if($logbookEntries[$j]->edit_of != 0)
 					echo "editedEntryContainer";
@@ -17,9 +17,13 @@ session_start();
 					</div>
 					<div class="entryContent" id="entry'.$logbookEntries[$j]->id.'C">'.$logbookEntries[$j]->content.'</div>
 				</div>';
-				for ($c = 0; $c < count($logbookEntries); $c++) {
-					if($logbookEntries[$c]->edit_of == $logbookEntries[$j]->id)
-						printRecursively($logbookEntries, $c);
+				$id = $logbookEntries[$j]->id;
+				unset($logbookEntries[$j]);
+				for ($c = 0; $c < $len; $c++) {
+					if(!isset($logbookEntries[$c]))
+						continue;
+					if($logbookEntries[$c]->edit_of == $id )
+						printRecursively($logbookEntries, $c, $len);
 				}
 			}
 
@@ -61,9 +65,10 @@ session_start();
 		$logbook = new Logbook($id);
 		$logbookEntries = $logbook->getAllEntries();
 		//print_r($logbookEntries);
-		for ($i = 0; $i < count($logbookEntries); $i++) {
-			
-			printRecursively($logbookEntries, $i);			
+		$len = count($logbookEntries);
+		for ($i = 0; $i < $len; $i++) {
+			if($logbookEntries[$i]->edit_of == 0)
+				printRecursively($logbookEntries, $i, $len);			
 		}
 	}
 	elseif($action == "share"){
